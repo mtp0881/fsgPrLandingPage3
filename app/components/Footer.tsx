@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '../contexts/LanguageContext';
+import Image from 'next/image';
 
 export default function Footer() {
   const { t, themeColor } = useLanguage();
@@ -39,10 +40,12 @@ export default function Footer() {
               </a>
               <a href="https://fptsoftware.jp/about-us/fpt-japan" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-600 text-white rounded-lg flex items-center justify-center hover:bg-gray-500 transition-colors">
                 <span className="sr-only">Website</span>
-                <img 
+                <Image 
                   src="/image17.png" 
                   alt="Website" 
-                  className="w-6 h-6 object-contain"
+                  width={24}
+                  height={24}
+                  className="object-contain"
                 />
               </a>
             </div>

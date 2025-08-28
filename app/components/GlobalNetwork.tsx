@@ -4,7 +4,7 @@ import WorldMap from './WorldMap';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function GlobalNetwork() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
 
   return (
     <section id="global-network" className="py-20 bg-gray-50">

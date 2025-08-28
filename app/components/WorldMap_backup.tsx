@@ -14,13 +14,19 @@ interface CityLocation {
 }
 
 export default function WorldMap() {
-  const { t, themeColor, language } = useLanguage();
+  const { themeColor, language } = useLanguage();
   const [mounted, setMounted] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [Map, setMap] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [MapContainer, setMapContainer] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [TileLayer, setTileLayer] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [Marker, setMarker] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [Popup, setPopup] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [Polyline, setPolyline] = useState<any>(null);
 
   // 23 địa điểm Nhật Bản + 30 địa điểm quốc tế để match với GlobalNetwork stats

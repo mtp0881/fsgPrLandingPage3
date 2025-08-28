@@ -12,7 +12,7 @@ import Footer from './components/Footer';
 import { useLanguage } from './contexts/LanguageContext';
 
 export default function Home() {
-  const { t } = useLanguage();
+  const { } = useLanguage();
 
   return (
     <div className="min-h-screen">

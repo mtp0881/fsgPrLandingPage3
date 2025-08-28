@@ -424,6 +424,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const t = (key: string): string => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (translations[language] as any)[key] || key;
   };
 
