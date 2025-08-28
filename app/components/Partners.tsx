@@ -65,13 +65,25 @@ export default function Partners() {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 relative overflow-hidden">
+      {/* Background with smooth transitions */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-100 via-orange-100 to-green-100"></div>
+      
+      {/* Floating shapes for visual interest */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-10 left-10 w-32 h-32 bg-blue-300 rounded-full blur-xl"></div>
+        <div className="absolute top-20 right-20 w-24 h-24 bg-orange-300 rounded-full blur-lg"></div>
+        <div className="absolute bottom-20 left-20 w-28 h-28 bg-green-300 rounded-full blur-xl"></div>
+        <div className="absolute bottom-10 right-10 w-20 h-20 bg-blue-200 rounded-full blur-md"></div>
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
             {t('partners.title')}
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
             {t('partners.subtitle')}
           </p>
         </div>
@@ -120,7 +132,7 @@ export default function Partners() {
 
         {/* Additional Partners Text */}
         <div className="mt-12 text-center">
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-600 text-sm">
             {t('partners.additional')}
           </p>
         </div>
