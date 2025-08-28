@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { kv } from '@vercel/kv';
 
-// Fallback content if file doesn't exist or in production
+// Fallback content if KV is not available
 const defaultContent = {
   "jp": {
     "hero": {
@@ -318,25 +319,40 @@ const defaultContent = {
 
 export async function GET() {
   try {
-    // In production, use the default content
-    if (process.env.NODE_ENV === 'production') {
-      return NextResponse.json(defaultContent);
+    // Try to get content from Vercel KV first
+    try {
+      const content = await kv.get('fsg-content');
+      if (content) {
+        return NextResponse.json(content);
+      }
+    } catch (kvError) {
+      console.log('KV not available, falling back to default:', kvError);
     }
 
-    // In development, try to read from file
-    const fs = await import('fs');
-    const path = await import('path');
-    const contentFilePath = path.join(process.cwd(), 'data', 'content.json');
-    
-    try {
-      const fileContents = fs.readFileSync(contentFilePath, 'utf8');
-      const content = JSON.parse(fileContents);
-      return NextResponse.json(content);
-    } catch (fileError) {
-      // If file doesn't exist, return default content
-      console.log('Using default content, file not found:', fileError);
-      return NextResponse.json(defaultContent);
+    // In development, try to read from file as fallback
+    if (process.env.NODE_ENV !== 'production') {
+      try {
+        const fs = await import('fs');
+        const path = await import('path');
+        const contentFilePath = path.join(process.cwd(), 'data', 'content.json');
+        const fileContents = fs.readFileSync(contentFilePath, 'utf8');
+        const content = JSON.parse(fileContents);
+        
+        // Save to KV for future use
+        try {
+          await kv.set('fsg-content', content);
+        } catch (kvSetError) {
+          console.log('Could not save to KV:', kvSetError);
+        }
+        
+        return NextResponse.json(content);
+      } catch (fileError) {
+        console.log('File not found, using default content');
+      }
     }
+
+    // Return default content as last resort
+    return NextResponse.json(defaultContent);
   } catch (error) {
     console.error('Error reading content:', error);
     return NextResponse.json(defaultContent);
@@ -355,29 +371,53 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // In production, we can't write to file system
-    // For now, we'll just return success but warn user
-    if (process.env.NODE_ENV === 'production') {
-      console.log('Production mode: Content save simulated');
+    // Save to Vercel KV (works in both development and production)
+    try {
+      await kv.set('fsg-content', content);
+      console.log('Content saved to Vercel KV successfully');
+      
+      // Also save to file in development for backup
+      if (process.env.NODE_ENV !== 'production') {
+        try {
+          const fs = await import('fs');
+          const path = await import('path');
+          const contentFilePath = path.join(process.cwd(), 'data', 'content.json');
+          fs.writeFileSync(contentFilePath, JSON.stringify(content, null, 2), 'utf8');
+          console.log('Content also saved to file as backup');
+        } catch (fileError) {
+          console.log('Could not save to file (backup):', fileError);
+        }
+      }
+      
       return NextResponse.json({ 
         success: true, 
-        message: 'Content saved (production mode - changes are temporary)',
-        warning: 'Changes will not persist after deployment restart'
+        message: 'Content saved successfully to Vercel KV'
       });
-    }
-
-    // In development, try to write to file
-    try {
-      const fs = await import('fs');
-      const path = await import('path');
-      const contentFilePath = path.join(process.cwd(), 'data', 'content.json');
+    } catch (kvError) {
+      console.error('Error saving to KV:', kvError);
       
-      fs.writeFileSync(contentFilePath, JSON.stringify(content, null, 2), 'utf8');
-      return NextResponse.json({ success: true });
-    } catch (fileError) {
-      console.error('Error writing file:', fileError);
+      // Fallback to file system in development
+      if (process.env.NODE_ENV !== 'production') {
+        try {
+          const fs = await import('fs');
+          const path = await import('path');
+          const contentFilePath = path.join(process.cwd(), 'data', 'content.json');
+          fs.writeFileSync(contentFilePath, JSON.stringify(content, null, 2), 'utf8');
+          return NextResponse.json({ 
+            success: true, 
+            message: 'Content saved to file (KV unavailable)'
+          });
+        } catch (fileError) {
+          console.error('Error writing file:', fileError);
+          return NextResponse.json(
+            { error: 'Failed to save content' },
+            { status: 500 }
+          );
+        }
+      }
+      
       return NextResponse.json(
-        { error: 'Failed to save content to file' },
+        { error: 'Failed to save content to KV' },
         { status: 500 }
       );
     }
