@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useContent } from '../hooks/useContent';
 
 export default function Contact() {
   const { t, themeColor } = useLanguage();
+  const { content, loading, error } = useContent();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,15 +33,31 @@ export default function Contact() {
     alert(message);
   };
 
+  if (loading) {
+    return (
+      <section id="contact" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center h-64">
+            <div className={`animate-spin rounded-full h-12 w-12 border-b-2 ${
+              themeColor === 'emerald' ? 'border-emerald-600' : 'border-blue-600'
+            }`}></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const contactContent = content?.contact || {};
+
   return (
     <section id="contact" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t('contact.title')}
+            {contactContent.title || t('contact.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {t('contact.subtitle')}
+            {contactContent.subtitle || t('contact.subtitle')}
           </p>
         </div>
 
@@ -49,7 +67,7 @@ export default function Contact() {
             <div className="bg-white p-8 rounded-xl shadow-lg h-full flex flex-col">
               <div className="flex-1 flex flex-col justify-between">
                 <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                  {t('contact.info.title')}
+                  {contactContent.info?.title || t('contact.info.title')}
                 </h3>
                 
                 <div className="flex-1 flex flex-col justify-evenly space-y-4">
@@ -65,7 +83,7 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">{t('contact.address')}</h4>
+                    <h4 className="font-medium text-gray-900">{contactContent.address || t('contact.address')}</h4>
                     <p className="text-gray-600">〒105-0011 東京都港区芝公園1-7-6</p>
                     <p className="text-gray-600">KDX浜松町プレイス6階（受付：5階）</p>
                   </div>
@@ -82,7 +100,7 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">{t('contact.phone')}</h4>
+                    <h4 className="font-medium text-gray-900">{contactContent.phone || t('contact.phone')}</h4>
                     <p className="text-gray-600">TEL: 03-6634-6868</p>
                     <p className="text-gray-600">FAX: 03-6634-6869</p>
                   </div>
@@ -99,7 +117,7 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">{t('contact.email')}</h4>
+                    <h4 className="font-medium text-gray-900">{contactContent.email || t('contact.email')}</h4>
                     <p className="text-gray-600">fsg@fpt-software.jp</p>
                   </div>
                 </div>
@@ -115,9 +133,9 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">{t('contact.hours')}</h4>
-                    <p className="text-gray-600">{t('contact.hours.weekday')}</p>
-                    <p className="text-gray-600">{t('contact.hours.saturday')}</p>
+                    <h4 className="font-medium text-gray-900">{contactContent.hours || t('contact.hours')}</h4>
+                    <p className="text-gray-600">{contactContent.hours_weekday || t('contact.hours.weekday')}</p>
+                    <p className="text-gray-600">{contactContent.hours_saturday || t('contact.hours.saturday')}</p>
                   </div>
                 </div>
               </div>
@@ -132,7 +150,7 @@ export default function Contact() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('contact.form.name')}
+                      {contactContent.form?.name || t('contact.form.name')}
                     </label>
                     <input
                       type="text"
@@ -151,7 +169,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('contact.form.email')}
+                      {contactContent.form?.email || t('contact.form.email')}
                     </label>
                     <input
                       type="email"
@@ -173,7 +191,7 @@ export default function Contact() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('contact.form.phone')}
+                      {contactContent.form?.phone || t('contact.form.phone')}
                     </label>
                     <input
                       type="tel"
@@ -191,7 +209,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('contact.form.company')}
+                      {contactContent.form?.company || t('contact.form.company')}
                     </label>
                     <input
                       type="text"
@@ -211,7 +229,7 @@ export default function Contact() {
 
                 <div>
                   <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('contact.form.service')}
+                    {contactContent.form?.service || t('contact.form.service')}
                   </label>
                   <select
                     id="service"
@@ -224,18 +242,18 @@ export default function Contact() {
                         : 'focus:ring-blue-500 focus:border-blue-500'
                     }`}
                   >
-                    <option value="">{t('contact.form.select_service')}</option>
+                    <option value="">{contactContent.form?.select_service || t('contact.form.select_service')}</option>
                     <option value="finance">{t('services.finance.title')}</option>
                     <option value="legacy">{t('services.legacy.title')}</option>
                     <option value="public">{t('services.public.title')}</option>
                     <option value="salesforce">{t('services.salesforce.title')}</option>
-                    <option value="other">{t('contact.form.service.other')}</option>
+                    <option value="other">{contactContent.form?.service_other || t('contact.form.service.other')}</option>
                   </select>
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('contact.form.message')}
+                    {contactContent.form?.message || t('contact.form.message')}
                   </label>
                   <textarea
                     id="message"
@@ -261,7 +279,7 @@ export default function Contact() {
                       : 'bg-blue-600 hover:bg-blue-700'
                   }`}
                 >
-                  {t('contact.form.submit')}
+                  {contactContent.form?.submit || t('contact.form.submit')}
                 </button>
               </form>
             </div>

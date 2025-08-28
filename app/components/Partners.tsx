@@ -1,10 +1,12 @@
 'use client';
 
 import { useLanguage } from '../contexts/LanguageContext';
+import { useContent } from '../hooks/useContent';
 import Image from 'next/image';
 
 export default function Partners() {
-  const { t } = useLanguage();
+  const { t, themeColor } = useLanguage();
+  const { content, loading, error } = useContent();
 
   const partners = [
     // Main Partners (larger display)
@@ -64,6 +66,23 @@ export default function Partners() {
     }
   ];
 
+  if (loading) {
+    return (
+      <section className="py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-100 via-orange-100 to-green-100"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center h-64">
+            <div className={`animate-spin rounded-full h-12 w-12 border-b-2 ${
+              themeColor === 'emerald' ? 'border-emerald-600' : 'border-blue-600'
+            }`}></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const partnersContent = content?.partners || {};
+
   return (
     <section className="py-16 relative overflow-hidden">
       {/* Background with smooth transitions */}
@@ -81,10 +100,10 @@ export default function Partners() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-            {t('partners.title')}
+            {partnersContent.title || t('partners.title')}
           </h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            {t('partners.subtitle')}
+            {partnersContent.subtitle || t('partners.subtitle')}
           </p>
         </div>
 
@@ -133,7 +152,7 @@ export default function Partners() {
         {/* Additional Partners Text */}
         <div className="mt-12 text-center">
           <p className="text-gray-600 text-sm">
-            {t('partners.additional')}
+            {partnersContent.additional || t('partners.additional')}
           </p>
         </div>
       </div>

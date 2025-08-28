@@ -3,9 +3,11 @@
 import { useLanguage } from '../contexts/LanguageContext';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useContent } from '../../hooks/useContent';
 
 export default function ServicesProducts() {
   const { t, themeColor } = useLanguage();
+  const { content, loading } = useContent();
   const [activeTab, setActiveTab] = useState<'services' | 'products'>('services');
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [loadingImages, setLoadingImages] = useState<{ [key: string]: boolean }>({});
@@ -37,7 +39,7 @@ export default function ServicesProducts() {
     if (selectedService) {
       const images = serviceImages[selectedService as keyof typeof serviceImages] || [];
       const initialLoadingState: { [key: string]: boolean } = {};
-      images.forEach(imagePath => {
+      images.forEach((imagePath: string) => {
         initialLoadingState[imagePath] = true;
       });
       setLoadingImages(initialLoadingState);
@@ -45,12 +47,25 @@ export default function ServicesProducts() {
   }, [selectedService]);
   
   const serviceImages = {
-    finance: ['/slides/Slide12.jpg', '/slides/Slide13.jpg'],
-    legacy: ['/slides/Slide18.jpg', '/slides/Slide19.jpg', '/slides/Slide20.jpg'],
-    public: ['/slides/Slide15.jpg', '/slides/Slide16.jpg'],
-    salesforce: ['/slides/Slide22.jpg', '/slides/Slide23.jpg', '/slides/Slide24.jpg', '/slides/Slide25.jpg', '/slides/Slide26.jpg', '/slides/Slide27.jpg'],
-    fpt: ['/slides/Slide4.jpg', '/slides/Slide5.jpg', '/slides/Slide6.jpg', '/slides/Slide7.jpg', '/slides/Slide8.jpg', '/slides/Slide9.jpg']
+    finance: content?.slides?.finance || ['/slides/Slide12.jpg', '/slides/Slide13.jpg'],
+    legacy: content?.slides?.legacy || ['/slides/Slide18.jpg', '/slides/Slide19.jpg', '/slides/Slide20.jpg'],
+    public: content?.slides?.public || ['/slides/Slide15.jpg', '/slides/Slide16.jpg'],
+    salesforce: content?.slides?.salesforce || ['/slides/Slide22.jpg', '/slides/Slide23.jpg', '/slides/Slide24.jpg', '/slides/Slide25.jpg', '/slides/Slide26.jpg', '/slides/Slide27.jpg'],
+    fpt: content?.slides?.fpt || ['/slides/Slide4.jpg', '/slides/Slide5.jpg', '/slides/Slide6.jpg', '/slides/Slide7.jpg', '/slides/Slide8.jpg', '/slides/Slide9.jpg']
   };
+
+  if (loading || !content) {
+    return (
+      <section id="services" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">コンテンツを読み込み中...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
   
   const services = [
     {
@@ -59,10 +74,10 @@ export default function ServicesProducts() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m-3-6h6" />
         </svg>
       ),
-      title: t('services.finance.title'),
-      description: t('services.finance.desc'),
+      title: content.services.finance.title,
+      description: content.services.finance.desc,
       features: [t('features.banking_systems'), t('features.insurance_systems'), t('features.securities_systems'), t('features.payment_systems')],
-      stats: t('services.finance.stats'),
+      stats: content.services.finance.stats,
       domain: "finance"
     },
     {
@@ -71,10 +86,10 @@ export default function ServicesProducts() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
         </svg>
       ),
-      title: t('services.legacy.title'),
-      description: t('services.legacy.desc'),
+      title: content.services.legacy.title,
+      description: content.services.legacy.desc,
       features: [t('features.cobol_migration'), t('features.db_migration'), t('features.system_modernization'), t('features.legacy_assessment')],
-      stats: t('services.legacy.stats'),
+      stats: content.services.legacy.stats,
       domain: "legacy"
     },
     {
@@ -83,10 +98,10 @@ export default function ServicesProducts() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
         </svg>
       ),
-      title: t('services.public.title'),
-      description: t('services.public.desc'),
+      title: content.services.public.title,
+      description: content.services.public.desc,
       features: [t('features.government_systems'), t('features.education_systems'), t('features.smart_city'), t('features.public_infrastructure')],
-      stats: t('services.public.stats'),
+      stats: content.services.public.stats,
       domain: "public"
     },
     {
@@ -95,43 +110,63 @@ export default function ServicesProducts() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
       ),
-      title: t('services.salesforce.title'),
-      description: t('services.salesforce.desc'),
+      title: content.services.salesforce.title,
+      description: content.services.salesforce.desc,
       features: [t('features.sales_cloud'), t('features.service_cloud'), t('features.mulesoft_integration'), t('features.data_cloud')],
-      stats: t('services.salesforce.stats'),
+      stats: content.services.salesforce.stats,
       domain: "salesforce"
     }
   ];
 
   const products = [
     {
-      name: t('products.finance.name'),
-      description: t('products.finance.desc'),
-      features: [t('products.finance.feature1'), t('products.finance.feature2'), t('products.finance.feature3'), t('products.finance.feature4')],
+      name: content?.products?.finance?.name || t('products.finance.name'),
+      description: content?.products?.finance?.desc || t('products.finance.desc'),
+      features: [
+        content?.products?.finance?.feature1 || t('products.finance.feature1'), 
+        content?.products?.finance?.feature2 || t('products.finance.feature2'), 
+        content?.products?.finance?.feature3 || t('products.finance.feature3'), 
+        content?.products?.finance?.feature4 || t('products.finance.feature4')
+      ],
       icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m-3-6h6',
       bgColor: 'from-green-100 to-emerald-100',
       iconColor: 'bg-green-600'
     },
     {
-      name: t('products.legacy.name'),
-      description: t('products.legacy.desc'),
-      features: [t('products.legacy.feature1'), t('products.legacy.feature2'), t('products.legacy.feature3'), t('products.legacy.feature4')],
+      name: content?.products?.legacy?.name || t('products.legacy.name'),
+      description: content?.products?.legacy?.desc || t('products.legacy.desc'),
+      features: [
+        content?.products?.legacy?.feature1 || t('products.legacy.feature1'), 
+        content?.products?.legacy?.feature2 || t('products.legacy.feature2'), 
+        content?.products?.legacy?.feature3 || t('products.legacy.feature3'), 
+        content?.products?.legacy?.feature4 || t('products.legacy.feature4')
+      ],
       icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4',
       bgColor: 'from-purple-100 to-violet-100',
       iconColor: 'bg-purple-600'
     },
     {
-      name: t('products.public.name'),
-      description: t('products.public.desc'),
-      features: [t('products.public.feature1'), t('products.public.feature2'), t('products.public.feature3'), t('products.public.feature4')],
+      name: content?.products?.public?.name || t('products.public.name'),
+      description: content?.products?.public?.desc || t('products.public.desc'),
+      features: [
+        content?.products?.public?.feature1 || t('products.public.feature1'), 
+        content?.products?.public?.feature2 || t('products.public.feature2'), 
+        content?.products?.public?.feature3 || t('products.public.feature3'), 
+        content?.products?.public?.feature4 || t('products.public.feature4')
+      ],
       icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
       bgColor: 'from-red-100 to-rose-100',
       iconColor: 'bg-red-600'
     },
     {
-      name: t('products.salesforce.name'),
-      description: t('products.salesforce.desc'),
-      features: [t('products.salesforce.feature1'), t('products.salesforce.feature2'), t('products.salesforce.feature3'), t('products.salesforce.feature4')],
+      name: content?.products?.salesforce?.name || t('products.salesforce.name'),
+      description: content?.products?.salesforce?.desc || t('products.salesforce.desc'),
+      features: [
+        content?.products?.salesforce?.feature1 || t('products.salesforce.feature1'), 
+        content?.products?.salesforce?.feature2 || t('products.salesforce.feature2'), 
+        content?.products?.salesforce?.feature3 || t('products.salesforce.feature3'), 
+        content?.products?.salesforce?.feature4 || t('products.salesforce.feature4')
+      ],
       icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
       bgColor: 'from-cyan-100 to-blue-100',
       iconColor: 'bg-cyan-600'
@@ -169,7 +204,7 @@ export default function ServicesProducts() {
           </div>
 
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {activeTab === 'services' ? t('services.subtitle') : t('products.subtitle')}
+            {activeTab === 'services' ? content.services.subtitle : (content?.products?.subtitle || t('products.subtitle'))}
           </p>
         </div>
 
@@ -268,7 +303,7 @@ export default function ServicesProducts() {
 
                   {/* Features */}
                   <div className="mb-6 flex-grow">
-                    <h4 className="font-medium text-gray-900 mb-2">{t('products.main_achievements')}:</h4>
+                    <h4 className="font-medium text-gray-900 mb-2">{content?.products?.main_achievements || t('products.main_achievements')}:</h4>
                     <ul className="space-y-1">
                       {product.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start text-sm text-gray-600">
@@ -292,10 +327,10 @@ export default function ServicesProducts() {
               : 'bg-gradient-to-r from-blue-50 to-indigo-100'
           }`}>
             <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              {t('products.custom.title')}
+              {content?.products?.custom?.title || t('products.custom.title')}
             </h3>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              {t('products.custom.desc')}
+              {content?.products?.custom?.desc || t('products.custom.desc')}
             </p>
             <button 
               onClick={() => {
@@ -343,7 +378,7 @@ export default function ServicesProducts() {
               </div>
               
               <div className="p-6 space-y-6">
-                {serviceImages[selectedService as keyof typeof serviceImages]?.map((imagePath, index) => (
+                {serviceImages[selectedService as keyof typeof serviceImages]?.map((imagePath: string, index: number) => (
                   <div key={index} className="relative w-full h-[600px] rounded-lg overflow-hidden shadow-lg">
                     {/* Loading Spinner */}
                     {loadingImages[imagePath] && (

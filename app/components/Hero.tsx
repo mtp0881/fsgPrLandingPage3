@@ -1,9 +1,24 @@
 'use client';
 
 import { useLanguage } from '../contexts/LanguageContext';
+import { useContent } from '../../hooks/useContent';
 
 export default function Hero() {
   const { t, themeColor } = useLanguage();
+  const { content, loading } = useContent();
+
+  if (loading || !content) {
+    return (
+      <section className="py-20 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">コンテンツを読み込み中...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section 
@@ -24,10 +39,10 @@ export default function Hero() {
           {/* Content */}
           <div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-2xl" style={{textShadow: '6px 6px 12px rgba(0,0,0,1), 4px 4px 8px rgba(0,0,0,0.9), 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.7)'}}>
-              {t('hero.title')}
+              {content.hero.title}
             </h1>
             <p className="text-xl text-gray-100 mb-8 leading-relaxed drop-shadow-lg" style={{textShadow: '5px 5px 10px rgba(0,0,0,1), 3px 3px 6px rgba(0,0,0,0.9), 1px 1px 2px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.6)'}}>
-              {t('hero.subtitle')}
+              {content.hero.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
@@ -49,7 +64,7 @@ export default function Hero() {
                 }`}
                 style={{textShadow: '2px 2px 4px rgba(0,0,0,0.7), 1px 1px 2px rgba(0,0,0,0.6)'}}
               >
-                {t('hero.explore')}
+                {content.hero.explore}
               </button>
               <button 
                 onClick={() => {
@@ -70,7 +85,7 @@ export default function Hero() {
                 }`}
                 style={{textShadow: '2px 2px 4px rgba(0,0,0,0.7), 1px 1px 2px rgba(0,0,0,0.6)'}}
               >
-                {t('hero.demo')}
+                {content.hero.demo}
               </button>
             </div>
           </div>
@@ -109,14 +124,14 @@ export default function Hero() {
             <div className="absolute -top-4 -left-4 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg">
               <div className="flex items-center space-x-2">
                 <div className={`w-3 h-3 rounded-full ${themeColor === 'emerald' ? 'bg-emerald-500' : 'bg-green-500'}`}></div>
-                <span className="text-sm font-medium text-gray-900">{t('hero.uptime')}</span>
+                <span className="text-sm font-medium text-gray-900">{content.hero.uptime}</span>
               </div>
             </div>
             
             <div className="absolute -bottom-4 -right-4 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg">
               <div className="flex items-center space-x-2">
                 <div className={`w-3 h-3 rounded-full ${themeColor === 'emerald' ? 'bg-emerald-500' : 'bg-blue-500'}`}></div>
-                <span className="text-sm font-medium text-gray-900">{t('hero.support')}</span>
+                <span className="text-sm font-medium text-gray-900">{content.hero.support}</span>
               </div>
             </div>
           </div>

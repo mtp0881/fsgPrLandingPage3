@@ -3,9 +3,11 @@
 import { useLanguage } from '../contexts/LanguageContext';
 import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
+import { useContent } from '../../hooks/useContent';
 
 export default function About() {
   const { t, themeColor } = useLanguage();
+  const { content, loading } = useContent();
   const [showFptModal, setShowFptModal] = useState(false);
   const [loadingImages, setLoadingImages] = useState<{ [key: number]: boolean }>({});
   
@@ -41,12 +43,25 @@ export default function About() {
     }
   }, [showFptModal, fptImages]);
 
+  if (loading || !content) {
+    return (
+      <section id="about" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">コンテンツを読み込み中...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t('about.title')}
+            {content.about.title}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             <button
@@ -69,9 +84,9 @@ export default function About() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">{t('about.mission.title')}</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">{content.about.mission.title}</h3>
             <p className="text-gray-600">
-              {t('about.mission.desc')}
+              {content.about.mission.desc}
             </p>
           </div>
 
@@ -85,9 +100,9 @@ export default function About() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">{t('about.vision.title')}</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">{content.about.vision.title}</h3>
             <p className="text-gray-600">
-              {t('about.vision.desc')}
+              {content.about.vision.desc}
             </p>
           </div>
 
@@ -100,9 +115,9 @@ export default function About() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">{t('about.values.title')}</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">{content.about.values.title}</h3>
             <p className="text-gray-600">
-              {t('about.values.desc')}
+              {content.about.values.desc}
             </p>
           </div>
         </div>

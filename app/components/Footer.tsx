@@ -2,9 +2,25 @@
 
 import { useLanguage } from '../contexts/LanguageContext';
 import Image from 'next/image';
+import { useContent } from '../../hooks/useContent';
 
 export default function Footer() {
   const { t, themeColor } = useLanguage();
+  const { content, loading } = useContent();
+
+  if (loading || !content) {
+    return (
+      <footer className={`text-white py-12 ${
+        themeColor === 'emerald' ? 'bg-emerald-950' : 'bg-gray-900'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-gray-300">Loading...</p>
+          </div>
+        </div>
+      </footer>
+    );
+  }
 
   return (
     <footer className={`text-white py-12 ${
@@ -20,10 +36,10 @@ export default function Footer() {
               FSG事業部
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
-              {t('footer.description')}
+              {content.footer.description}
             </p>
             <div className="text-sm text-gray-400 mb-6">
-              <p>{t('footer.company')}</p>
+              <p>{content.footer.company}</p>
             </div>
             
             {/* Social Links */}
@@ -135,7 +151,7 @@ export default function Footer() {
         <div className={`mt-8 pt-8 text-center text-gray-400 ${
           themeColor === 'emerald' ? 'border-t border-emerald-900' : 'border-t border-gray-800'
         }`}>
-          <p>{t('footer.copyright')}</p>
+          <p>{content.footer.copyright}</p>
         </div>
       </div>
     </footer>

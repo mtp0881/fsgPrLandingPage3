@@ -25,7 +25,7 @@ const translations = {
     'nav.consultation': '無料相談',
     
     // Hero Section
-    'hero.title': 'FSG事業本部 デジタル変革のパートナー',
+    'hero.title': 'FSG事業部 デジタル変革のパートナー',
     'hero.subtitle': 'FPTソフトウェアジャパンの金融・公共・レガシー・Salesforce専門部門として、19年以上の実績で日本企業のDXを支援します。',
     'hero.explore': '詳細を見る',
     'hero.demo': 'サービス紹介',
