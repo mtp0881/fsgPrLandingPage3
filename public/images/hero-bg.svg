@@ -1,0 +1,65 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bg-gradient)"/>
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+  
+  <!-- Tech elements -->
+  <g opacity="0.3">
+    <!-- Circuits -->
+    <circle cx="300" cy="200" r="80" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+    <circle cx="300" cy="200" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+    <line x1="220" y1="200" x2="380" y2="200" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    <line x1="300" y1="120" x2="300" y2="280" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    
+    <!-- More tech shapes -->
+    <rect x="1400" y="150" width="100" height="100" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" rx="10"/>
+    <rect x="1420" y="170" width="60" height="60" fill="rgba(255,255,255,0.1)" rx="5"/>
+    
+    <!-- Connection lines -->
+    <path d="M 500 300 Q 800 100 1200 400 Q 1400 500 1600 300" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+    <path d="M 200 600 Q 600 400 1000 700 Q 1300 800 1700 600" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+    
+    <!-- Data nodes -->
+    <circle cx="600" cy="400" r="12" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="1000" cy="600" r="8" fill="rgba(255,255,255,0.25)"/>
+    <circle cx="1400" cy="350" r="10" fill="rgba(255,255,255,0.3)"/>
+    
+    <!-- Floating elements -->
+    <g transform="translate(1200, 800)">
+      <rect x="0" y="0" width="80" height="50" fill="rgba(255,255,255,0.1)" rx="8"/>
+      <text x="40" y="30" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="monospace" font-size="12">FSG</text>
+    </g>
+    
+    <!-- Binary background -->
+    <g opacity="0.1" font-family="monospace" font-size="14" fill="rgba(255,255,255,0.3)">
+      <text x="100" y="500">01001000 01100101 01101100 01101100 01101111</text>
+      <text x="200" y="750">01000110 01010011 01000111 00100000 01001010 01010000</text>
+      <text x="800" y="900">01000100 01101001 01100111 01101001 01110100 01100001 01101100</text>
+    </g>
+  </g>
+  
+  <!-- Particle effects -->
+  <g opacity="0.4">
+    <circle cx="150" cy="300" r="2" fill="white">
+      <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="800" cy="200" r="1.5" fill="white">
+      <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1500" cy="500" r="2.5" fill="white">
+      <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>
