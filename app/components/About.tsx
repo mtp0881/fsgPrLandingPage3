@@ -1,9 +1,14 @@
 'use client';
 
 import { useLanguage } from '../contexts/LanguageContext';
+import { useState } from 'react';
+import Image from 'next/image';
 
 export default function About() {
   const { t, themeColor } = useLanguage();
+  const [showFptModal, setShowFptModal] = useState(false);
+  
+  const fptImages = ['/slides/Slide4.jpg', '/slides/Slide5.jpg', '/slides/Slide6.jpg', '/slides/Slide7.jpg', '/slides/Slide8.jpg', '/slides/Slide9.jpg'];
 
   return (
     <section id="about" className="py-20 bg-white">
@@ -13,7 +18,13 @@ export default function About() {
             {t('about.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {t('about.subtitle')}
+            <button
+              onClick={() => setShowFptModal(true)}
+              className="text-blue-600 hover:text-blue-800 underline font-semibold transition-colors"
+            >
+              FPTソフトウェアジャパン
+            </button>
+            のパブリックファイナンスサービス開発事業本部として、金融・公共・レガシー・Salesforceの4つの専門分野で日本のデジタル変革をリードしています。
           </p>
         </div>
 
@@ -85,6 +96,54 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      {/* FPT Modal */}
+      {showFptModal && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowFptModal(false)}
+        >
+          <div 
+            className="bg-white rounded-xl max-w-6xl w-full max-h-[90vh] overflow-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center p-6 border-b">
+              <h3 className="text-2xl font-bold text-gray-900">
+                FPTソフトウェアジャパン - 会社紹介
+              </h3>
+              <button 
+                onClick={() => setShowFptModal(false)}
+                className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
+              >
+                ×
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-6">
+              {fptImages.map((imagePath, index) => (
+                <div key={index} className="relative w-full h-[700px] rounded-lg overflow-hidden shadow-lg">
+                  <Image
+                    src={imagePath}
+                    alt={`FPT Software Japan slide ${index + 1}`}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                  />
+                </div>
+              ))}
+            </div>
+            
+            <div className="p-6 border-t text-center">
+              <button 
+                onClick={() => setShowFptModal(false)}
+                className="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200"
+              >
+                閉じる
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

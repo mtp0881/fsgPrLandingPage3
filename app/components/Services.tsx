@@ -12,7 +12,8 @@ export default function Services() {
     finance: ['/slides/Slide12.jpg', '/slides/Slide13.jpg'],
     legacy: ['/slides/Slide18.jpg', '/slides/Slide19.jpg', '/slides/Slide20.jpg'],
     public: ['/slides/Slide15.jpg', '/slides/Slide16.jpg'],
-    salesforce: ['/slides/Slide22.jpg', '/slides/Slide23.jpg', '/slides/Slide24.jpg', '/slides/Slide25.jpg', '/slides/Slide26.jpg', '/slides/Slide27.jpg']
+    salesforce: ['/slides/Slide22.jpg', '/slides/Slide23.jpg', '/slides/Slide24.jpg', '/slides/Slide25.jpg', '/slides/Slide26.jpg', '/slides/Slide27.jpg'],
+    fpt: ['/slides/Slide4.jpg', '/slides/Slide5.jpg', '/slides/Slide6.jpg', '/slides/Slide7.jpg', '/slides/Slide8.jpg', '/slides/Slide9.jpg']
   };
   
   const services = [
@@ -150,7 +151,7 @@ export default function Services() {
             onClick={() => setSelectedService(null)}
           >
             <div 
-              className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-auto"
+              className="bg-white rounded-xl max-w-6xl w-full max-h-[90vh] overflow-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center p-6 border-b">
@@ -167,7 +168,7 @@ export default function Services() {
               
               <div className="p-6 space-y-6">
                 {serviceImages[selectedService as keyof typeof serviceImages]?.map((imagePath, index) => (
-                  <div key={index} className="relative w-full h-[500px] rounded-lg overflow-hidden shadow-lg">
+                  <div key={index} className="relative w-full h-[600px] rounded-lg overflow-hidden shadow-lg">
                     <Image
                       src={imagePath}
                       alt={`${selectedService} slide ${index + 1}`}
