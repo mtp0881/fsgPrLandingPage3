@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
     // Disable TypeScript strict checking during builds if needed
     ignoreBuildErrors: false,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
