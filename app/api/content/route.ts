@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+// Initialize Redis client
+const redis = Redis.fromEnv();
 
 // Fallback content if KV is not available
 const defaultContent = {
@@ -319,14 +322,14 @@ const defaultContent = {
 
 export async function GET() {
   try {
-    // Try to get content from Vercel KV first
+    // Try to get content from Upstash Redis first
     try {
-      const content = await kv.get('fsg-content');
+      const content = await redis.get('fsg-content');
       if (content) {
         return NextResponse.json(content);
       }
-    } catch (kvError) {
-      console.log('KV not available, falling back to default:', kvError);
+    } catch (redisError) {
+      console.log('Redis not available, falling back to default:', redisError);
     }
 
     // In development, try to read from file as fallback
@@ -338,11 +341,11 @@ export async function GET() {
         const fileContents = fs.readFileSync(contentFilePath, 'utf8');
         const content = JSON.parse(fileContents);
         
-        // Save to KV for future use
+        // Save to Redis for future use
         try {
-          await kv.set('fsg-content', content);
-        } catch (kvSetError) {
-          console.log('Could not save to KV:', kvSetError);
+          await redis.set('fsg-content', content);
+        } catch (redisSetError) {
+          console.log('Could not save to Redis:', redisSetError);
         }
         
         return NextResponse.json(content);
@@ -371,10 +374,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Save to Vercel KV (works in both development and production)
+    // Save to Upstash Redis (works in both development and production)
     try {
-      await kv.set('fsg-content', content);
-      console.log('Content saved to Vercel KV successfully');
+      await redis.set('fsg-content', content);
+      console.log('Content saved to Upstash Redis successfully');
       
       // Also save to file in development for backup
       if (process.env.NODE_ENV !== 'production') {
@@ -391,10 +394,10 @@ export async function POST(request: NextRequest) {
       
       return NextResponse.json({ 
         success: true, 
-        message: 'Content saved successfully to Vercel KV'
+        message: 'Content saved successfully to Upstash Redis'
       });
-    } catch (kvError) {
-      console.error('Error saving to KV:', kvError);
+    } catch (redisError) {
+      console.error('Error saving to Redis:', redisError);
       
       // Fallback to file system in development
       if (process.env.NODE_ENV !== 'production') {
@@ -405,7 +408,7 @@ export async function POST(request: NextRequest) {
           fs.writeFileSync(contentFilePath, JSON.stringify(content, null, 2), 'utf8');
           return NextResponse.json({ 
             success: true, 
-            message: 'Content saved to file (KV unavailable)'
+            message: 'Content saved to file (Redis unavailable)'
           });
         } catch (fileError) {
           console.error('Error writing file:', fileError);
@@ -417,7 +420,7 @@ export async function POST(request: NextRequest) {
       }
       
       return NextResponse.json(
-        { error: 'Failed to save content to KV' },
+        { error: 'Failed to save content to Redis' },
         { status: 500 }
       );
     }
