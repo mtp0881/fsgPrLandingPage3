@@ -364,6 +364,11 @@ export default function AdminPanel() {
                               const newSlides = [...(currentContent.slides?.fpt || [])];
                               newSlides[index] = uploadedUrl;
                               updateContent('slides', 'fpt', newSlides);
+                              
+                              // Auto-save content after successful upload
+                              setTimeout(() => {
+                                saveContent();
+                              }, 100);
                             }
                           }
                           e.target.value = '';
@@ -573,6 +578,11 @@ export default function AdminPanel() {
                                       const newSlides = [...(currentContent.slides?.[service] || [])];
                                       newSlides[index] = uploadedUrl;
                                       updateContent('slides', service, newSlides);
+                                      
+                                      // Auto-save content after successful upload
+                                      setTimeout(() => {
+                                        saveContent();
+                                      }, 100);
                                     }
                                   }
                                   e.target.value = '';
