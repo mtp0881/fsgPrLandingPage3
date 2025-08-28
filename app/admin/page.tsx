@@ -118,16 +118,23 @@ export default function AdminPanel() {
       });
 
       if (response.ok) {
-        setMessage('✅ 保存されました！');
+        const result = await response.json();
+        if (result.warning) {
+          setMessage(`⚠️ ${result.message || '保存されました'} (${result.warning})`);
+        } else {
+          setMessage('✅ 保存されました！');
+        }
       } else {
-        throw new Error('Save failed');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Save failed');
       }
     } catch (error) {
       console.error('Error saving content:', error);
-      setMessage('❌ 保存に失敗しました');
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      setMessage(`❌ 保存に失敗しました: ${errorMessage}`);
     } finally {
       setSaving(false);
-      setTimeout(() => setMessage(''), 3000);
+      setTimeout(() => setMessage(''), 5000); // Longer timeout for production warning
     }
   };
 
