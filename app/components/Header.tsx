@@ -157,6 +157,8 @@ export default function Header() {
             <div className="w-[120px] shrink-0">
               <Link
                 href="/admin"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`text-gray-600 hover:text-gray-800 px-2 py-2 rounded-lg border border-gray-300 hover:border-gray-400 transition-colors whitespace-nowrap text-center text-xs block w-full ${
                   themeColor === 'emerald' 
                     ? 'hover:text-emerald-600 hover:border-emerald-300' 
@@ -317,6 +319,8 @@ export default function Header() {
               {/* Mobile Admin Login */}
               <Link
                 href="/admin"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}
                 className={`text-gray-600 hover:text-gray-800 px-6 py-2 rounded-lg border border-gray-300 hover:border-gray-400 transition-colors text-center mx-4 block ${
                   themeColor === 'emerald' 
