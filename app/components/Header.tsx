@@ -71,27 +71,6 @@ export default function Header() {
             </button>
             <button 
               onClick={() => {
-                const servicesSection = document.getElementById('services');
-                if (servicesSection) {
-                  const headerHeight = 80;
-                  const elementPosition = servicesSection.offsetTop - headerHeight;
-                  window.scrollTo({
-                    top: elementPosition,
-                    behavior: 'smooth'
-                  });
-                  // Trigger tab change to products
-                  const event = new CustomEvent('changeServicesProductsTab', {
-                    detail: { tab: 'products' }
-                  });
-                  window.dispatchEvent(event);
-                }
-              }}
-              className={`text-gray-700 transition-colors whitespace-nowrap ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
-            >
-              {t('nav.products')}
-            </button>
-            <button 
-              onClick={() => {
                 const globalSection = document.getElementById('global-network');
                 if (globalSection) {
                   const headerHeight = 80;
@@ -233,28 +212,6 @@ export default function Header() {
                 className={`text-gray-700 transition-colors text-left ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
               >
                 {t('nav.services')}
-              </button>
-              <button
-                onClick={() => {
-                  const servicesSection = document.getElementById('services');
-                  if (servicesSection) {
-                    const headerHeight = 80;
-                    const elementPosition = servicesSection.offsetTop - headerHeight;
-                    window.scrollTo({
-                      top: elementPosition,
-                      behavior: 'smooth'
-                    });
-                    // Trigger tab change to products
-                    const event = new CustomEvent('changeServicesProductsTab', {
-                      detail: { tab: 'products' }
-                    });
-                    window.dispatchEvent(event);
-                  }
-                  setIsMenuOpen(false);
-                }}
-                className={`text-gray-700 transition-colors text-left ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
-              >
-                {t('nav.products')}
               </button>
               <button
                 onClick={() => {

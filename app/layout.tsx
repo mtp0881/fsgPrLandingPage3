@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FSG Department - Technology Solutions",
+  title: "FSG事業部 - Finance Technology Solutions",
   description: "FPTソフトウェアジャパンの金融・公共・レガシー・Salesforce専門部門として、19年以上の実績で日本企業のDXを支援します。",
 };
 

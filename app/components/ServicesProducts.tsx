@@ -8,6 +8,7 @@ export default function ServicesProducts() {
   const { t, themeColor } = useLanguage();
   const [activeTab, setActiveTab] = useState<'services' | 'products'>('services');
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [loadingImages, setLoadingImages] = useState<{ [key: string]: boolean }>({});
 
   // Listen for external tab changes
   useEffect(() => {
@@ -21,6 +22,27 @@ export default function ServicesProducts() {
       window.removeEventListener('changeServicesProductsTab', handleTabChange as EventListener);
     };
   }, []);
+
+  // Handle image loading
+  const handleImageLoadStart = (imagePath: string) => {
+    setLoadingImages(prev => ({ ...prev, [imagePath]: true }));
+  };
+
+  const handleImageLoadComplete = (imagePath: string) => {
+    setLoadingImages(prev => ({ ...prev, [imagePath]: false }));
+  };
+
+  // Initialize loading state when modal opens
+  useEffect(() => {
+    if (selectedService) {
+      const images = serviceImages[selectedService as keyof typeof serviceImages] || [];
+      const initialLoadingState: { [key: string]: boolean } = {};
+      images.forEach(imagePath => {
+        initialLoadingState[imagePath] = true;
+      });
+      setLoadingImages(initialLoadingState);
+    }
+  }, [selectedService]);
   
   const serviceImages = {
     finance: ['/slides/Slide12.jpg', '/slides/Slide13.jpg'],
@@ -323,12 +345,25 @@ export default function ServicesProducts() {
               <div className="p-6 space-y-6">
                 {serviceImages[selectedService as keyof typeof serviceImages]?.map((imagePath, index) => (
                   <div key={index} className="relative w-full h-[600px] rounded-lg overflow-hidden shadow-lg">
+                    {/* Loading Spinner */}
+                    {loadingImages[imagePath] && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                        <div className="flex flex-col items-center space-y-2">
+                          <div className={`w-8 h-8 border-3 border-gray-300 border-t-3 rounded-full animate-spin ${
+                            themeColor === 'emerald' ? 'border-t-emerald-500' : 'border-t-blue-500'
+                          }`}></div>
+                          <span className="text-sm text-gray-500">Loading...</span>
+                        </div>
+                      </div>
+                    )}
                     <Image
                       src={imagePath}
                       alt={`${selectedService} slide ${index + 1}`}
                       fill
                       className="object-contain"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                      onLoadingComplete={() => handleImageLoadComplete(imagePath)}
+                      priority={index === 0}
                     />
                   </div>
                 ))}

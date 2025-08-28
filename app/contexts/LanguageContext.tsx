@@ -33,8 +33,8 @@ const translations = {
     'hero.support': '15拠点 全国対応',
     
     // About Section
-    'about.title': 'FSG事業本部について',
-    'about.subtitle': 'FPTソフトウェアジャパンのパブリックファイナンスサービス開発事業本部として、金融・公共・レガシー・Salesforceの4つの専門分野で日本のデジタル変革をリードしています。',
+    'about.title': 'FSG事業部について',
+    'about.subtitle': 'FPTソフトウェアジャパンのパブリックファイナンスサービス開発事業部として、金融・公共・レガシー・Salesforceの4つの専門分野で日本のデジタル変革をリードしています。',
     'about.mission.title': 'ミッション',
     'about.mission.desc': '19年以上の経験と豊富な人材を活かし、銀行・保険・証券を中心とした金融業界のデジタル変革を支援します。',
     'about.vision.title': 'ビジョン',
@@ -67,7 +67,7 @@ const translations = {
     
     // Products Section - Changed to Achievements (実績)
     'products.title': '主要実績',
-    'products.subtitle': 'FSG事業本部の4つの専門分野における代表的なプロジェクト実績をご紹介します',
+    'products.subtitle': 'FSG事業部の4つの専門分野における代表的なプロジェクト実績をご紹介します',
     'products.finance.name': '金融システム開発',
     'products.finance.desc': 'メガバンク・大手保険・証券会社向けの基幹システム開発において業界をリードする実績を誇ります。',
     'products.legacy.name': 'レガシーモダナイゼーション',
@@ -78,7 +78,7 @@ const translations = {
     'products.salesforce.desc': '専門家によるSales Cloud・Service Cloud・MuleSoft統合で企業のCRM変革を支援。',
     'products.demo': '詳細',
     'products.custom.title': 'カスタマイズソリューションをお探しですか？',
-    'products.custom.desc': 'FSG事業本部では、お客様の具体的な要件に応じて最適なソリューションを設計・開発いたします。無料相談をご利用ください。',
+    'products.custom.desc': 'FSG事業部では、お客様の具体的な要件に応じて最適なソリューションを設計・開発いたします。無料相談をご利用ください。',
     'products.custom.contact': '無料相談のお申込み',
     'products.main_achievements': '主要実績',
     'products.finance.feature1': '基幹システム・チャネルシステム開発',
@@ -211,7 +211,7 @@ const translations = {
     'nav.consultation': 'Tư Vấn Miễn Phí',
     
     // Hero Section
-    'hero.title': 'FSG事業本部 - Đối Tác Chuyển Đổi Số',
+    'hero.title': 'FSG事業部 - Đối Tác Chuyển Đổi Số',
     'hero.subtitle': 'Phòng ban chuyên về Tài chính, Dịch vụ công, Legacy và Salesforce thuộc FPT Software Japan, hỗ trợ DX với 19+ năm kinh nghiệm.',
     'hero.explore': 'Tìm Hiểu Thêm',
     'hero.demo': 'Giới Thiệu Dịch Vụ',

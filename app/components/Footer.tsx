@@ -17,7 +17,7 @@ export default function Footer() {
             <div className={`text-2xl font-bold mb-4 ${
               themeColor === 'emerald' ? 'text-emerald-400' : 'text-blue-400'
             }`}>
-              FSG Department
+              FSG事業部
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
               {t('footer.description')}
