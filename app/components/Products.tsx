@@ -115,7 +115,14 @@ export default function Products() {
             <button 
               onClick={() => {
                 const contactSection = document.getElementById('contact');
-                contactSection?.scrollIntoView({ behavior: 'smooth' });
+                if (contactSection) {
+                  const headerHeight = 80; // Chiều cao của header
+                  const elementPosition = contactSection.offsetTop - headerHeight;
+                  window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                  });
+                }
               }}
               className={`text-white px-8 py-3 rounded-lg transition-colors ${
                 themeColor === 'emerald' 

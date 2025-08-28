@@ -11,7 +11,7 @@ export default function Footer() {
       themeColor === 'emerald' ? 'bg-emerald-950' : 'bg-gray-900'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div className="md:col-span-2">
             <div className={`text-2xl font-bold mb-4 ${
@@ -28,7 +28,7 @@ export default function Footer() {
             
             {/* Social Links */}
             <div className="flex space-x-4">
-              <a href="https://jp.linkedin.com/company/fptjapanholdings" target="_blank" rel="noopener noreferrer" className={`w-10 h-10 text-white rounded-lg flex items-center justify-center transition-colors ${
+              <a href="https://jp.linkedin.com/company/fptjapanholdings" target="_blank" rel="noopener noreferrer" className={`w-10 h-10 text-white rounded-lg flex items-center justify-center transition-colors bg-gray-600 ${
                 themeColor === 'emerald' 
                   ? 'bg-emerald-400 hover:bg-emerald-500' 
                   : 'bg-blue-400 hover:bg-blue-500'
@@ -59,25 +59,6 @@ export default function Footer() {
               <li><a href="#services" className="hover:text-white transition-colors">{t('services.legacy.title')}</a></li>
               <li><a href="#services" className="hover:text-white transition-colors">{t('services.public.title')}</a></li>
               <li><a href="#services" className="hover:text-white transition-colors">{t('services.salesforce.title')}</a></li>
-            </ul>
-          </div>
-          
-          {/* Contact Info */}
-          <div>
-            <h3 className="font-semibold text-white mb-4">{t('footer.contact')}</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li className="text-sm">
-                <div>〒105-0011</div>
-                <div>東京都港区芝公園1-7-6</div>
-                <div>KDX浜松町プレイス6階</div>
-              </li>
-              <li className="text-sm mt-3">
-                <div>TEL: 03-6634-6868</div>
-                <div>FAX: 03-6634-6869</div>
-              </li>
-              <li className="text-sm">
-                fsg@fpt-software.jp
-              </li>
             </ul>
           </div>
         </div>

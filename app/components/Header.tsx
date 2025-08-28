@@ -9,17 +9,28 @@ export default function Header() {
   const { language, setLanguage, t, themeColor } = useLanguage();
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-white shadow-sm sticky top-0 z-50 overflow-visible">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="text-center">
-              <div className="text-lg text-gray-500">
-                FPTソフトウェアジャパン株式会社
-              </div>
-              <div className={`text-3xl font-bold ${themeColor === 'emerald' ? 'text-emerald-600' : 'text-blue-600'}`}>
-                FSG
+            <Link href="/" className="flex items-center">
+              <div className="flex flex-col items-center">
+                <div className="text-gray-500 text-lx leading-tight mb-1">
+                  FPTソフトウェアジャパン株式会社
+                </div>
+                <div className="flex items-center space-x-3">
+                  <img 
+                    src="/logo_fpt_text_black.webp" 
+                    alt="FPT Software" 
+                    className="h-10 w-auto"
+                  />
+                  <img 
+                    src="/logo.png" 
+                    alt="FSG - Finance Services Group" 
+                    className="h-10 w-auto relative z-10"
+                  />
+                </div>
               </div>
             </Link>
           </div>
@@ -71,16 +82,26 @@ export default function Header() {
             
             {/* CTA Button - Fixed width */}
             <div className="w-[140px] shrink-0">
-              <Link
-                href="#contact"
-                className={`text-white px-4 py-2 rounded-lg transition-colors whitespace-nowrap text-center text-sm block ${
+              <button
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    const headerHeight = 80; // Chiều cao của header
+                    const elementPosition = contactSection.offsetTop - headerHeight;
+                    window.scrollTo({
+                      top: elementPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
+                className={`text-white px-4 py-2 rounded-lg transition-colors whitespace-nowrap text-center text-sm block w-full ${
                   themeColor === 'emerald' 
                     ? 'bg-emerald-600 hover:bg-emerald-700' 
                     : 'bg-blue-600 hover:bg-blue-700'
                 }`}
               >
                 {t('nav.consultation')}
-              </Link>
+              </button>
             </div>
           </div>
 
@@ -175,17 +196,27 @@ export default function Header() {
                 </button>
               </div>
               
-              <Link
-                href="#contact"
-                className={`text-white px-6 py-2 rounded-lg transition-colors text-center mx-4 ${
+              <button
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    const headerHeight = 80; // Chiều cao của header
+                    const elementPosition = contactSection.offsetTop - headerHeight;
+                    window.scrollTo({
+                      top: elementPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                  setIsMenuOpen(false);
+                }}
+                className={`text-white px-6 py-2 rounded-lg transition-colors text-center mx-4 block ${
                   themeColor === 'emerald' 
                     ? 'bg-emerald-600 hover:bg-emerald-700' 
                     : 'bg-blue-600 hover:bg-blue-700'
                 }`}
-                onClick={() => setIsMenuOpen(false)}
               >
                 {t('nav.consultation')}
-              </Link>
+              </button>
             </nav>
           </div>
         )}

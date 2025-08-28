@@ -16,6 +16,7 @@ interface CityLocation {
 export default function WorldMap() {
   const { themeColor, language } = useLanguage();
   const [mounted, setMounted] = useState(false);
+  const [isMapInteractive, setIsMapInteractive] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [Map, setMap] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,8 +27,6 @@ export default function WorldMap() {
   const [Marker, setMarker] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [Popup, setPopup] = useState<any>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [Polyline, setPolyline] = useState<any>(null);
 
   // 23 địa điểm Nhật Bản + 30 địa điểm quốc tế để match với GlobalNetwork stats
   const cities: CityLocation[] = [
@@ -530,7 +529,6 @@ export default function WorldMap() {
         setTileLayer(reactLeaflet.TileLayer);
         setMarker(reactLeaflet.Marker);
         setPopup(reactLeaflet.Popup);
-        setPolyline(reactLeaflet.Polyline);
         setMounted(true);
       };
       
@@ -566,32 +564,7 @@ export default function WorldMap() {
     });
   };
 
-  const createConnections = () => {
-    const tokyo = cities.find(city => city.name.includes('Tokyo'));
-    if (!tokyo) return [];
 
-    return cities.filter(city => !city.name.includes('Tokyo')).map((city, index) => {
-      const positions: [number, number][] = [
-        [tokyo.lat, tokyo.lng],
-        [city.lat, city.lng]
-      ];
-      
-      const color = city.type === 'japan' 
-        ? (themeColor === 'emerald' ? '#10b981' : '#3b82f6')
-        : '#ef4444';
-
-      return (
-        <Polyline
-          key={index}
-          positions={positions}
-          color={color}
-          weight={2}
-          opacity={0.6}
-          dashArray={city.type === 'world' ? '5, 10' : undefined}
-        />
-      );
-    });
-  };
 
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg relative z-10">
@@ -602,20 +575,22 @@ export default function WorldMap() {
       </div>
 
       {/* Map */}
-      <div className="h-[550px] rounded-lg overflow-hidden border border-gray-200 relative z-10">
+      <div 
+        className="h-[550px] rounded-lg overflow-hidden border border-gray-200 relative z-10"
+        onClick={() => setIsMapInteractive(true)}
+      >
         <MapContainer
+          key={isMapInteractive ? 'interactive' : 'static'} // Force re-render
           center={[35.6762, 139.6503]} // Tokyo center
           zoom={6}
           style={{ height: '100%', width: '100%' }}
-          scrollWheelZoom={true}
+          scrollWheelZoom={isMapInteractive}
+          doubleClickZoom={true}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          
-          {/* Connections */}
-          {createConnections()}
           
           {/* Markers */}
           {cities.map((city, index) => (
@@ -647,6 +622,17 @@ export default function WorldMap() {
             </Marker>
           ))}
         </MapContainer>
+        
+        {/* Interactive hint overlay */}
+        {!isMapInteractive && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/10 backdrop-blur-[0.5px] z-10 pointer-events-none">
+            <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg">
+              <p className="text-sm text-gray-700 font-medium">
+                {language === 'vn' ? 'Click để tương tác với bản đồ' : 'クリックして地図と対話'}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

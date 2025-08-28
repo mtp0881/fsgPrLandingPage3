@@ -46,13 +46,14 @@ export default function Contact() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Contact Info */}
           <div className="lg:col-span-1">
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                {t('contact.info.title')}
-              </h3>
-              
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
+            <div className="bg-white p-8 rounded-xl shadow-lg h-full flex flex-col">
+              <div className="flex-1 flex flex-col justify-between">
+                <h3 className="text-xl font-semibold text-gray-900 mb-6">
+                  {t('contact.info.title')}
+                </h3>
+                
+                <div className="flex-1 flex flex-col justify-evenly space-y-4">
+                  <div className="flex items-start space-x-4">
                   <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                     themeColor === 'emerald' ? 'bg-emerald-100' : 'bg-blue-100'
                   }`}>
@@ -120,12 +121,13 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
+              </div>
             </div>
           </div>
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white p-8 rounded-xl shadow-lg">
+            <div className="bg-white p-8 rounded-xl shadow-lg h-full">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>

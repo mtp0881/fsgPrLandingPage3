@@ -15,12 +15,8 @@ export default function Hero() {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* Overlay - commented out to show background image clearly */}
-      {/* <div className={`absolute inset-0 ${
-        themeColor === 'emerald' 
-          ? 'bg-emerald-900/20' 
-          : 'bg-blue-900/20'
-      }`}></div> */}
+      {/* Overlay - blur effect */}
+      <div className={`absolute inset-0 bg-black/20 backdrop-blur-[2px]`}></div>
       
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,7 +33,14 @@ export default function Hero() {
               <button 
                 onClick={() => {
                   const aboutSection = document.getElementById('about');
-                  aboutSection?.scrollIntoView({ behavior: 'smooth' });
+                  if (aboutSection) {
+                    const headerHeight = 80; // Chiều cao của header
+                    const elementPosition = aboutSection.offsetTop - headerHeight;
+                    window.scrollTo({
+                      top: elementPosition,
+                      behavior: 'smooth'
+                    });
+                  }
                 }}
                 className={`text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg ${
                   themeColor === 'emerald' 
@@ -51,7 +54,14 @@ export default function Hero() {
               <button 
                 onClick={() => {
                   const servicesSection = document.getElementById('services');
-                  servicesSection?.scrollIntoView({ behavior: 'smooth' });
+                  if (servicesSection) {
+                    const headerHeight = 80; // Chiều cao của header
+                    const elementPosition = servicesSection.offsetTop - headerHeight;
+                    window.scrollTo({
+                      top: elementPosition,
+                      behavior: 'smooth'
+                    });
+                  }
                 }}
                 className={`text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg ${
                   themeColor === 'emerald' 
@@ -86,10 +96,10 @@ export default function Hero() {
                   <h3 className="text-xl font-semibold text-gray-900">FSG事業本部</h3>
                   <p className="text-gray-600 mt-2">デジタル変革のエキスパート</p>
                   <div className="grid grid-cols-2 gap-2 mt-4 text-xs">
-                    <div className="bg-green-100 text-green-700 px-2 py-1 rounded">金融</div>
-                    <div className="bg-red-100 text-red-700 px-2 py-1 rounded">公共</div>
-                    <div className="bg-purple-100 text-purple-700 px-2 py-1 rounded">レガシー</div>
-                    <div className="bg-cyan-100 text-cyan-700 px-2 py-1 rounded">Salesforce</div>
+                    <div className="bg-green-300 text-green-700 px-2 py-1 rounded border border-green-500">金融</div>
+                    <div className="bg-red-100 text-red-700 px-2 py-1 rounded border border-red-500">公共</div>
+                    <div className="bg-purple-300 text-purple-700 px-2 py-1 rounded border border-purple-500">レガシー</div>
+                    <div className="bg-cyan-100 text-cyan-700 px-2 py-1 rounded border border-cyan-500">Salesforce</div>
                   </div>
                 </div>
               </div>
