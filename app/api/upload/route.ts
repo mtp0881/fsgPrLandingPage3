@@ -45,8 +45,17 @@ export async function POST(request: NextRequest) {
                                   process.env.CLOUDINARY_API_KEY && 
                                   process.env.CLOUDINARY_API_SECRET;
 
-    if (process.env.NODE_ENV === 'production' && isCloudinaryConfigured) {
-      // Use Cloudinary in production
+    console.log('Cloudinary config check:', {
+      cloudName: !!process.env.CLOUDINARY_CLOUD_NAME,
+      apiKey: !!process.env.CLOUDINARY_API_KEY,
+      apiSecret: !!process.env.CLOUDINARY_API_SECRET,
+      isConfigured: isCloudinaryConfigured,
+      nodeEnv: process.env.NODE_ENV
+    });
+
+    if (isCloudinaryConfigured) {
+      // Use Cloudinary (both development and production)
+      console.log('🌤️ Using Cloudinary for upload');
       try {
         // Convert file to base64 for Cloudinary upload
         const arrayBuffer = await file.arrayBuffer();
@@ -61,6 +70,7 @@ export async function POST(request: NextRequest) {
           public_id: `slide_${Date.now()}`,
         });
 
+        console.log('✅ Cloudinary upload successful:', result.secure_url);
         return NextResponse.json({ 
           success: true, 
           url: result.secure_url,
@@ -75,7 +85,8 @@ export async function POST(request: NextRequest) {
         );
       }
     } else {
-      // Fallback to local file system in development
+      // Fallback to local file system
+      console.log('📁 Using local file system for upload');
       try {
         // Create slides directory if it doesn't exist
         const slidesDir = path.join(process.cwd(), 'public', 'slides');

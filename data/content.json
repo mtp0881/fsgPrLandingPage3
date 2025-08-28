@@ -21,7 +21,8 @@
       "legacy": [
         "/slides/Slide18.jpg",
         "/slides/Slide19.jpg",
-        "/slides/Slide20.jpg"
+        "/slides/Slide20.jpg",
+        "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756402886/fsg-slides/slide_1756402886426.jpg"
       ],
       "public": [
         "/slides/Slide15.jpg",
@@ -41,7 +42,10 @@
         "/slides/Slide6.jpg",
         "/slides/Slide7.jpg",
         "/slides/Slide8.jpg",
-        "/slides/Slide9.jpg"
+        "/slides/Slide9.jpg",
+        "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756403045/fsg-slides/slide_1756403043101.jpg",
+        "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756403145/fsg-slides/slide_1756403143431.jpg",
+        "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756403184/fsg-slides/slide_1756403182883.jpg"
       ]
     },
     "footer": {
