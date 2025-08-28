@@ -16,7 +16,6 @@ interface CityLocation {
 export default function WorldMap() {
   const { themeColor, language } = useLanguage();
   const [mounted, setMounted] = useState(false);
-  const [isMapInteractive, setIsMapInteractive] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [Map, setMap] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -570,26 +569,29 @@ export default function WorldMap() {
     <div className="bg-white p-6 rounded-xl shadow-lg relative z-10">
       <div className="mb-4">
         <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          {language === 'vn' ? 'Bản Đồ Tương Tác' : 'インタラクティブマップ'}
+          {language === 'vn' ? 'Bản Đồ Toàn Cầu' : '世界地図'}
         </h3>
       </div>
 
       {/* Map */}
       <div 
         className="h-[550px] rounded-lg overflow-hidden border border-gray-200 relative z-10"
-        onClick={() => setIsMapInteractive(true)}
       >
         <MapContainer
-          key={isMapInteractive ? 'interactive' : 'static'} // Force re-render
-          center={[35.6762, 139.6503]} // Tokyo center
-          zoom={6}
+          center={[30, 25]} // Center shifted left between India and Europe
+          zoom={2}
           style={{ height: '100%', width: '100%' }}
-          scrollWheelZoom={isMapInteractive}
-          doubleClickZoom={true}
+          scrollWheelZoom={false}
+          doubleClickZoom={false}
+          dragging={false}
+          zoomControl={false}
+          touchZoom={false}
+          boxZoom={false}
+          keyboard={false}
         >
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution=''
+            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
           />
           
           {/* Markers */}
@@ -622,17 +624,6 @@ export default function WorldMap() {
             </Marker>
           ))}
         </MapContainer>
-        
-        {/* Interactive hint overlay */}
-        {!isMapInteractive && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/10 backdrop-blur-[0.5px] z-10 pointer-events-none">
-            <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg">
-              <p className="text-sm text-gray-700 font-medium">
-                {language === 'vn' ? 'Click để tương tác với bản đồ' : 'クリックして地図と対話'}
-              </p>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

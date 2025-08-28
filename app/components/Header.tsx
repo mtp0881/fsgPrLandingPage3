@@ -37,21 +37,91 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <Link href="#about" className={`text-gray-700 transition-colors whitespace-nowrap ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}>
+            <button 
+              onClick={() => {
+                const aboutSection = document.getElementById('about');
+                if (aboutSection) {
+                  const headerHeight = 80;
+                  const elementPosition = aboutSection.offsetTop - headerHeight;
+                  window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+              className={`text-gray-700 transition-colors whitespace-nowrap ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
+            >
               {t('nav.about')}
-            </Link>
-            <Link href="#services" className={`text-gray-700 transition-colors whitespace-nowrap ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}>
+            </button>
+            <button 
+              onClick={() => {
+                const servicesSection = document.getElementById('services');
+                if (servicesSection) {
+                  const headerHeight = 80;
+                  const elementPosition = servicesSection.offsetTop - headerHeight;
+                  window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+              className={`text-gray-700 transition-colors whitespace-nowrap ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
+            >
               {t('nav.services')}
-            </Link>
-            <Link href="#products" className={`text-gray-700 transition-colors whitespace-nowrap ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}>
+            </button>
+            <button 
+              onClick={() => {
+                const servicesSection = document.getElementById('services');
+                if (servicesSection) {
+                  const headerHeight = 80;
+                  const elementPosition = servicesSection.offsetTop - headerHeight;
+                  window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                  });
+                  // Trigger tab change to products
+                  const event = new CustomEvent('changeServicesProductsTab', {
+                    detail: { tab: 'products' }
+                  });
+                  window.dispatchEvent(event);
+                }
+              }}
+              className={`text-gray-700 transition-colors whitespace-nowrap ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
+            >
               {t('nav.products')}
-            </Link>
-            <Link href="#global-network" className={`text-gray-700 transition-colors whitespace-nowrap ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}>
+            </button>
+            <button 
+              onClick={() => {
+                const globalSection = document.getElementById('global-network');
+                if (globalSection) {
+                  const headerHeight = 80;
+                  const elementPosition = globalSection.offsetTop - headerHeight;
+                  window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+              className={`text-gray-700 transition-colors whitespace-nowrap ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
+            >
               {t('nav.global')}
-            </Link>
-            <Link href="#contact" className={`text-gray-700 transition-colors whitespace-nowrap ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}>
+            </button>
+            <button 
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  const headerHeight = 80;
+                  const elementPosition = contactSection.offsetTop - headerHeight;
+                  window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+              className={`text-gray-700 transition-colors whitespace-nowrap ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
+            >
               {t('nav.contact')}
-            </Link>
+            </button>
           </nav>
 
           {/* Language Switcher & CTA Button */}
@@ -130,41 +200,96 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t">
             <nav className="flex flex-col space-y-4">
-              <Link
-                href="#about"
-                className={`text-gray-700 transition-colors ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
-                onClick={() => setIsMenuOpen(false)}
+              <button
+                onClick={() => {
+                  const aboutSection = document.getElementById('about');
+                  if (aboutSection) {
+                    const headerHeight = 80;
+                    const elementPosition = aboutSection.offsetTop - headerHeight;
+                    window.scrollTo({
+                      top: elementPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                  setIsMenuOpen(false);
+                }}
+                className={`text-gray-700 transition-colors text-left ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
               >
                 {t('nav.about')}
-              </Link>
-              <Link
-                href="#services"
-                className={`text-gray-700 transition-colors ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button
+                onClick={() => {
+                  const servicesSection = document.getElementById('services');
+                  if (servicesSection) {
+                    const headerHeight = 80;
+                    const elementPosition = servicesSection.offsetTop - headerHeight;
+                    window.scrollTo({
+                      top: elementPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                  setIsMenuOpen(false);
+                }}
+                className={`text-gray-700 transition-colors text-left ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
               >
                 {t('nav.services')}
-              </Link>
-              <Link
-                href="#products"
-                className={`text-gray-700 transition-colors ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button
+                onClick={() => {
+                  const servicesSection = document.getElementById('services');
+                  if (servicesSection) {
+                    const headerHeight = 80;
+                    const elementPosition = servicesSection.offsetTop - headerHeight;
+                    window.scrollTo({
+                      top: elementPosition,
+                      behavior: 'smooth'
+                    });
+                    // Trigger tab change to products
+                    const event = new CustomEvent('changeServicesProductsTab', {
+                      detail: { tab: 'products' }
+                    });
+                    window.dispatchEvent(event);
+                  }
+                  setIsMenuOpen(false);
+                }}
+                className={`text-gray-700 transition-colors text-left ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
               >
                 {t('nav.products')}
-              </Link>
-              <Link
-                href="#global-network"
-                className={`text-gray-700 transition-colors ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button
+                onClick={() => {
+                  const globalSection = document.getElementById('global-network');
+                  if (globalSection) {
+                    const headerHeight = 80;
+                    const elementPosition = globalSection.offsetTop - headerHeight;
+                    window.scrollTo({
+                      top: elementPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                  setIsMenuOpen(false);
+                }}
+                className={`text-gray-700 transition-colors text-left ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
               >
                 {t('nav.global')}
-              </Link>
-              <Link
-                href="#contact"
-                className={`text-gray-700 transition-colors ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    const headerHeight = 80;
+                    const elementPosition = contactSection.offsetTop - headerHeight;
+                    window.scrollTo({
+                      top: elementPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                  setIsMenuOpen(false);
+                }}
+                className={`text-gray-700 transition-colors text-left ${themeColor === 'emerald' ? 'hover:text-emerald-600' : 'hover:text-blue-600'}`}
               >
                 {t('nav.contact')}
-              </Link>
+              </button>
               
               {/* Mobile Language Switcher */}
               <div className="flex items-center justify-center bg-gray-100 rounded-lg p-1 mx-4">

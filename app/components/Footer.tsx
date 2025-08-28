@@ -55,10 +55,78 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-white mb-4">{t('footer.business_domains')}</h3>
             <ul className="space-y-2 text-gray-300">
-              <li><a href="#services" className="hover:text-white transition-colors">{t('services.finance.title')}</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">{t('services.legacy.title')}</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">{t('services.public.title')}</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">{t('services.salesforce.title')}</a></li>
+              <li>
+                <button 
+                  onClick={() => {
+                    const servicesSection = document.getElementById('services');
+                    if (servicesSection) {
+                      const headerHeight = 80;
+                      const elementPosition = servicesSection.offsetTop - headerHeight;
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
+                  className="hover:text-white transition-colors text-left"
+                >
+                  {t('services.finance.title')}
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => {
+                    const servicesSection = document.getElementById('services');
+                    if (servicesSection) {
+                      const headerHeight = 80;
+                      const elementPosition = servicesSection.offsetTop - headerHeight;
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
+                  className="hover:text-white transition-colors text-left"
+                >
+                  {t('services.legacy.title')}
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => {
+                    const servicesSection = document.getElementById('services');
+                    if (servicesSection) {
+                      const headerHeight = 80;
+                      const elementPosition = servicesSection.offsetTop - headerHeight;
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
+                  className="hover:text-white transition-colors text-left"
+                >
+                  {t('services.public.title')}
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => {
+                    const servicesSection = document.getElementById('services');
+                    if (servicesSection) {
+                      const headerHeight = 80;
+                      const elementPosition = servicesSection.offsetTop - headerHeight;
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
+                  className="hover:text-white transition-colors text-left"
+                >
+                  {t('services.salesforce.title')}
+                </button>
+              </li>
             </ul>
           </div>
         </div>

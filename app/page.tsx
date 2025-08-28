@@ -3,8 +3,7 @@
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
-import Services from './components/Services';
-import Products from './components/Products';
+import ServicesProducts from './components/ServicesProducts';
 import GlobalNetwork from './components/GlobalNetwork';
 import Partners from './components/Partners';
 import Contact from './components/Contact';
@@ -20,9 +19,8 @@ export default function Home() {
       <main>
         <Hero />
         <About />
-        <Services />
+        <ServicesProducts />
         <Partners />
-        <Products />
         <GlobalNetwork />
         <Contact />
       </main>
