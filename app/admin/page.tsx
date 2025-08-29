@@ -1096,6 +1096,33 @@ export default function AdminPanel() {
               </div>
             </div>
             <div className="p-6 space-y-6">
+              {/* Title and Subtitle */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h3 className="text-md font-medium text-gray-900 mb-3">セクションタイトル・サブタイトル</h3>
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">タイトル</label>
+                    <input
+                      type="text"
+                      value={safeGet(currentContent, 'global_network.title')}
+                      onChange={(e) => updateContent('global_network', 'title', e.target.value)}
+                      className="w-full p-3 border border-gray-300 rounded-lg text-gray-900"
+                      placeholder="グローバルネットワーク"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">サブタイトル</label>
+                    <textarea
+                      value={safeGet(currentContent, 'global_network.subtitle')}
+                      onChange={(e) => updateContent('global_network', 'subtitle', e.target.value)}
+                      className="w-full p-3 border border-gray-300 rounded-lg text-gray-900"
+                      rows={2}
+                      placeholder="世界30カ国・地域に86拠点を展開し、グローバルな視点でお客様のビジネス成長をサポートします。"
+                    />
+                  </div>
+                </div>
+              </div>
+
               {/* Global Presence Stats */}
               <div className="bg-gray-50 rounded-lg p-4">
                 <h3 className="text-md font-medium text-gray-900 mb-3">グローバル展開統計</h3>
