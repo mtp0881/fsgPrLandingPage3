@@ -11,14 +11,20 @@ export default function About() {
   const [showFptModal, setShowFptModal] = useState(false);
   const [loadingImages, setLoadingImages] = useState<{ [key: number]: boolean }>({});
   
-  const fptImages = useMemo(() => [
-    '/slides/Slide4.jpg', 
-    '/slides/Slide5.jpg', 
-    '/slides/Slide6.jpg', 
-    '/slides/Slide7.jpg', 
-    '/slides/Slide8.jpg', 
-    '/slides/Slide9.jpg'
-  ], []);
+  // Get FPT images from content instead of hardcoded
+  const fptImages = useMemo(() => {
+    if (!content || !content.slides || !content.slides.fpt) {
+      return [
+        '/slides/Slide4.jpg', 
+        '/slides/Slide5.jpg', 
+        '/slides/Slide6.jpg', 
+        '/slides/Slide7.jpg', 
+        '/slides/Slide8.jpg', 
+        '/slides/Slide9.jpg'
+      ];
+    }
+    return content.slides.fpt;
+  }, [content]);
 
   const handleImageLoadStart = (index: number) => {
     setLoadingImages(prev => ({ ...prev, [index]: true }));
@@ -36,7 +42,7 @@ export default function About() {
   useEffect(() => {
     if (showFptModal) {
       const initialLoadingState: { [key: number]: boolean } = {};
-      fptImages.forEach((_, index) => {
+      fptImages.forEach((_: string, index: number) => {
         initialLoadingState[index] = true;
       });
       setLoadingImages(initialLoadingState);
@@ -70,7 +76,7 @@ export default function About() {
             >
               FPTソフトウェアジャパン
             </button>
-            のパブリックファイナンスサービス開発事業部として、金融・公共・レガシー・Salesforceの4つの専門分野で日本のデジタル変革をリードしています。
+            のファイナンスサービス開発事業部として、金融・公共・レガシー・Salesforceの4つの専門分野で日本のデジタル変革をリードしています。
           </p>
         </div>
 
@@ -166,7 +172,7 @@ export default function About() {
             </div>
             
             <div className="p-6 space-y-6">
-              {fptImages.map((imagePath, index) => (
+              {fptImages.map((imagePath: string, index: number) => (
                 <div key={index} className="relative w-full h-[700px] rounded-lg overflow-hidden shadow-lg">
                   {loadingImages[index] && (
                     <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">

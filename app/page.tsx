@@ -23,17 +23,17 @@ export default function Home() {
       setLoadingProgress(prev => {
         if (prev >= 100) {
           clearInterval(progressInterval);
-          setTimeout(() => setIsLoading(false), 500); // Small delay before hiding loading screen
+          setTimeout(() => setIsLoading(false), 200); // Small delay before hiding loading screen
           return 100;
         }
-        return prev + Math.random() * 15; // Random increment for realistic loading
+        return prev + Math.random() * 20; // Faster increment for quicker loading
       });
-    }, 200);
+    }, 100);
 
     // Minimum loading time
     const minLoadTime = setTimeout(() => {
       setLoadingProgress(100);
-    }, 3000);
+    }, 2000); // Changed from 2000ms to 1000ms (1 second)
 
     return () => {
       clearInterval(progressInterval);

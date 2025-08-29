@@ -11,6 +11,7 @@ interface ContentData {
   contact: any;
   partners: any;
   footer: any;
+  global_network: any;
 }
 
 export function useContent() {

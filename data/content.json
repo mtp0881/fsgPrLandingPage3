@@ -2,16 +2,68 @@
   "jp": {
     "hero": {
       "title": "FSG事業部 デジタル変革のパートナー",
-      "subtitle": "FPTソフトウェアジャパンの金融・公共・レガシー・Salesforce専門部門として、19年以上の実績で日本企業のDXを支援します。",
+      "subtitle": "革新的なテクノロジーと豊富な経験で、お客様のビジネス変革を全力でサポートします。19年以上の実績と信頼で、企業の成長と競争力向上を実現します。",
       "explore": "詳細を見る",
       "demo": "サービス紹介",
       "uptime": "500+ 金融エンジニア",
-      "support": "15拠点 全国対応"
+      "support": "15拠点 全国対応",
+      "fsg_title": "FSG事業部",
+      "fsg_subtitle": "デジタル変革のエキスパート",
+      "domains": {
+        "finance": "金融",
+        "public": "公共",
+        "legacy": "レガシー",
+        "salesforce": " Salesforce"
+      }
     },
     "partners": {
       "title": "信頼されるクライアント",
       "subtitle": "日本全国の大手企業・官公庁から信頼され、共に成長し続けています。",
-      "additional": "その他多数の企業・組織と戦略的パートナーシップを構築"
+      "additional": "その他多数の企業・組織と戦略的パートナーシップを構築",
+      "main_partners": [
+        {
+          "logo": "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756446319/fsg-slides/slide_1756446319570.png",
+          "width": 200,
+          "height": 100
+        },
+        {
+          "logo": "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756446340/fsg-slides/slide_1756446340048.png",
+          "width": 200,
+          "height": 100
+        },
+        {
+          "logo": "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756446452/fsg-slides/slide_1756446452491.webp",
+          "width": 200,
+          "height": 100
+        }
+      ],
+      "secondary_partners": [
+        {
+          "logo": "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756446716/fsg-slides/slide_1756446716139.webp",
+          "width": 120,
+          "height": 60
+        },
+        {
+          "logo": "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756446723/fsg-slides/slide_1756446723053.webp",
+          "width": 120,
+          "height": 60
+        },
+        {
+          "logo": "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756446729/fsg-slides/slide_1756446729442.webp",
+          "width": 120,
+          "height": 60
+        },
+        {
+          "logo": "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756446734/fsg-slides/slide_1756446734935.webp",
+          "width": 120,
+          "height": 60
+        },
+        {
+          "logo": "https://res.cloudinary.com/dxhgvzyk3/image/upload/v1756446741/fsg-slides/slide_1756446740955.webp",
+          "width": 120,
+          "height": 60
+        }
+      ]
     },
     "slides": {
       "finance": [
@@ -47,7 +99,21 @@
     "footer": {
       "description": "FPTソフトウェアジャパンのFSGデパートメント。金融、レガシー、公共、Salesforceの4つの事業ドメインで専門的なソリューションを提供。",
       "company": "FPTソフトウェアジャパン株式会社 FSGデパートメント",
-      "copyright": "© 2025 FPTソフトウェアジャパン FSGデパートメント. 全著作権所有。"
+      "copyright": "© 2025 FPTソフトウェアジャパン FSGデパートメント. 全著作権所有。",
+      "business_domains": {
+        "title": "事業ドメイン",
+        "links": {
+          "finance": "金融サービス",
+          "public": "パブリックサービス",
+          "legacy": "レガシーモダナイゼーション",
+          "salesforce": "Salesforceソリューション"
+        }
+      },
+      "social_links": {
+        "website": "https://fptsoftware.jp/about-us/fpt-japan",
+        "linkedin": "https://jp.linkedin.com/company/fptjapanholdings"
+      },
+      "title": "FSG事業部"
     },
     "about": {
       "title": "FSG事業部について",
@@ -152,13 +218,82 @@
         "submit": "送信する",
         "select_service": "サービスを選択してください",
         "service_other": "その他"
+      },
+      "address_line1": "〒105-0011 東京都港区芝公園1-7-6",
+      "address_line2": "KDX浜松町プレイス6階（受付：5階）",
+      "tel_number": "03-6634-6868",
+      "fax_number": "03-6634-6869",
+      "email_address": "fsg@fpt-software.jp"
+    },
+    "global_network": {
+      "stats": {
+        "japan_offices": "23",
+        "countries": "30",
+        "total_offices": "86"
+      },
+      "capabilities": {
+        "dev_centers": {
+          "0": "1",
+          "1": "8",
+          "2": "+",
+          "label": "開発センター",
+          "value": "18+"
+        },
+        "ai_partners": {
+          "0": "5",
+          "1": "+",
+          "label": "AIパートナー",
+          "value": "5+"
+        },
+        "salesforce_experts": {
+          "0": "2",
+          "1": "0",
+          "2": "0",
+          "3": "+",
+          "label": "Salesforce専門家",
+          "value": "200+"
+        },
+        "finance_engineers": {
+          "0": "5",
+          "1": "0",
+          "2": "0",
+          "3": "+",
+          "label": "金融エンジニア",
+          "value": "500+"
+        },
+        "ai_researchers": {
+          "0": "2",
+          "1": "0",
+          "2": "K",
+          "3": "+",
+          "label": "AI研究者",
+          "value": "20K+"
+        }
+      },
+      "features": {
+        "quy_nhon_ai": {
+          "title": "クイニョンAIセンター",
+          "description": "94,000㎡敷地・20,000人AI研究者"
+        },
+        "ai_partnerships": {
+          "title": "AIパートナーシップ",
+          "description": "NVIDIA・Mila・Landing AI・IBM・Meta"
+        },
+        "global_deployment": {
+          "title": "グローバル展開",
+          "description": "30カ国・地域86オフィス・センター"
+        },
+        "quality_standards": {
+          "title": "国際品質基準",
+          "description": "ISO/IEC 27001・CMMI Level 5・SOC2"
+        }
       }
     }
   },
   "vn": {
     "hero": {
       "title": "FSG事業部 - Đối Tác Chuyển Đổi Số",
-      "subtitle": "Phòng ban chuyên về Tài chính, Dịch vụ công, Legacy và Salesforce thuộc FPTソフトウェアジャパン, hỗ trợ DX với 19+ năm kinh nghiệm.",
+      "subtitle": "Với công nghệ tiên tiến và kinh nghiệm phong phú, chúng tôi cam kết hỗ trợ toàn diện quá trình chuyển đổi số của doanh nghiệp. Hơn 19 năm uy tín và niềm tin, giúp doanh nghiệp tăng trưởng và nâng cao sức cạnh tranh.",
       "explore": "Tìm Hiểu Thêm",
       "demo": "Giới Thiệu Dịch Vụ",
       "uptime": "500+ Kỹ Sư Tài Chính",

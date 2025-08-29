@@ -108,13 +108,25 @@ export default function Hero() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">FSG事業部</h3>
-                  <p className="text-gray-600 mt-2">デジタル変革のエキスパート</p>
-                  <div className="grid grid-cols-2 gap-2 mt-4 text-xs">
-                    <div className="bg-green-300 text-green-700 px-2 py-1 rounded border border-green-500">金融</div>
-                    <div className="bg-red-100 text-red-700 px-2 py-1 rounded border border-red-500">公共</div>
-                    <div className="bg-purple-300 text-purple-700 px-2 py-1 rounded border border-purple-500">レガシー</div>
-                    <div className="bg-cyan-100 text-cyan-700 px-2 py-1 rounded border border-cyan-500">Salesforce</div>
+                  <h3 className="text-xl font-semibold text-gray-900">
+                    {content.hero.fsg_title || 'FSG事業部'}
+                  </h3>
+                  <p className="text-gray-600 mt-2">
+                    {content.hero.fsg_subtitle || 'デジタル変革のエキスパート'}
+                  </p>
+                  <div className="grid grid-cols-4 gap-1 mt-4 text-base font-medium">
+                    <div className="bg-green-300 text-green-700 px-3 py-2 rounded border border-green-500 text-center">
+                      {content.hero.domains?.finance || '金融'}
+                    </div>
+                    <div className="bg-red-100 text-red-700 px-3 py-2 rounded border border-red-500 text-center">
+                      {content.hero.domains?.public || '公共'}
+                    </div>
+                    <div className="bg-purple-300 text-purple-700 px-3 py-2 rounded border border-purple-500 text-center">
+                      {content.hero.domains?.legacy || 'レガシー'}
+                    </div>
+                    <div className="bg-cyan-100 text-cyan-700 px-3 py-2 rounded border border-cyan-500 text-center">
+                      {content.hero.domains?.salesforce || 'Salesforce'}
+                    </div>
                   </div>
                 </div>
               </div>

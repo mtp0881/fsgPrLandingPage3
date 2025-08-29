@@ -8,32 +8,29 @@ export default function Partners() {
   const { t, themeColor } = useLanguage();
   const { content, loading, error } = useContent();
 
-  const partners = [
-    // Main Partners (larger display)
+  // Fallback partners if no content is available
+  const fallbackMainPartners = [
     {
       name: 'NTT Data',
       logo: '/partners/ntt-data--600.png',
       width: 200,
-      height: 100,
-      isMain: true
+      height: 100
     },
     {
       name: 'Partner 596797',
       logo: '/partners/596797.png',
       width: 160,
-      height: 80,
-      isMain: true
+      height: 80
     },
     {
       name: 'Fujitsu',
       logo: '/partners/fujitsu.webp',
       width: 180,
-      height: 90,
-      isMain: true
+      height: 90
     }
   ];
 
-  const secondaryPartners = [
+  const fallbackSecondaryPartners = [
     {
       name: 'Deutsche Bank',
       logo: '/partners/deutsche-bank.webp',
@@ -65,6 +62,10 @@ export default function Partners() {
       height: 60
     }
   ];
+
+  // Use content data if available, otherwise use fallback
+  const mainPartners = content?.partners?.main_partners || fallbackMainPartners;
+  const secondaryPartners = content?.partners?.secondary_partners || fallbackSecondaryPartners;
 
   if (loading) {
     return (
@@ -109,7 +110,7 @@ export default function Partners() {
 
         {/* Main Partners Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch justify-items-center mb-12">
-          {partners.map((partner, index) => (
+          {mainPartners.map((partner: any, index: number) => (
             <div
               key={index}
               className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center justify-center h-32 w-full"
@@ -117,9 +118,9 @@ export default function Partners() {
               <div className="relative flex items-center justify-center w-full h-full">
                 <Image
                   src={partner.logo}
-                  alt={partner.name}
-                  width={partner.width}
-                  height={partner.height}
+                  alt={partner.name || `Partner ${index + 1}`}
+                  width={partner.width || 200}
+                  height={partner.height || 100}
                   className="object-contain transition-transform duration-300 hover:scale-105 max-w-full max-h-full"
                   style={{ maxWidth: '90%', maxHeight: '90%' }}
                 />
@@ -130,7 +131,7 @@ export default function Partners() {
 
         {/* Secondary Partners Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 items-stretch justify-items-center">
-          {secondaryPartners.map((partner, index) => (
+          {secondaryPartners.map((partner: any, index: number) => (
             <div
               key={index}
               className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-center h-20 w-full"
@@ -138,9 +139,9 @@ export default function Partners() {
               <div className="relative flex items-center justify-center w-full h-full">
                 <Image
                   src={partner.logo}
-                  alt={partner.name}
-                  width={partner.width}
-                  height={partner.height}
+                  alt={partner.name || `Secondary Partner ${index + 1}`}
+                  width={partner.width || 120}
+                  height={partner.height || 60}
                   className="object-contain transition-transform duration-300 hover:scale-105 max-w-full max-h-full"
                   style={{ maxWidth: '85%', maxHeight: '85%' }}
                 />

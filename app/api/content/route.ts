@@ -13,7 +13,15 @@ const defaultContent = {
       "explore": "詳細を見る",
       "demo": "サービス紹介",
       "uptime": "500+ 金融エンジニア",
-      "support": "15拠点 全国対応"
+      "support": "15拠点 全国対応",
+      "fsg_title": "FSG事業部",
+      "fsg_subtitle": "デジタル変革のエキスパート",
+      "domains": {
+        "finance": "金融",
+        "public": "公共",
+        "legacy": "レガシー",
+        "salesforce": "Salesforce"
+      }
     },
     "partners": {
       "title": "信頼されるクライアント",
@@ -58,7 +66,7 @@ const defaultContent = {
     },
     "about": {
       "title": "FSG事業部について",
-      "subtitle": "FPTソフトウェアジャパンのパブリックファイナンスサービス開発事業部として、金融・公共・レガシー・Salesforceの4つの専門分野で日本のデジタル変革をリードしています。",
+      "subtitle": "FPTソフトウェアジャパンのファイナンスサービス開発事業部として、金融・公共・レガシー・Salesforceの4つの専門分野で日本のデジタル変革をリードしています。",
       "mission": {
         "title": "ミッション",
         "desc": "19年以上の経験と豊富な人材を活かし、銀行・保険・証券を中心とした金融業界のデジタル変革を支援します。"
@@ -74,7 +82,7 @@ const defaultContent = {
     },
     "services": {
       "title": "私たちのサービス",
-      "subtitle": "金融、パブリック、レガシーモダナイゼーション、Salesforceの4つの主要領域で専門的なソリューションを提供",
+      "subtitle": "金融、公共、レガシーモダナイゼーション、Salesforceの4つの主要領域で専門的なソリューションを提供",
       "finance": {
         "title": "金融サービス",
         "desc": "銀行・保険・証券業界向けの基幹システム開発からDX推進まで包括的なソリューションを提供。",
@@ -86,7 +94,7 @@ const defaultContent = {
         "stats": "19年+経験"
       },
       "public": {
-        "title": "パブリックサービス",
+        "title": "公共サービス",
         "desc": "官公庁・自治体・教育機関向けに社会インフラと福祉発展のための安定したソリューションを提供。",
         "stats": "15拠点全国展開"
       },
@@ -169,7 +177,15 @@ const defaultContent = {
       "explore": "Tìm Hiểu Thêm",
       "demo": "Giới Thiệu Dịch Vụ",
       "uptime": "500+ Kỹ Sư Tài Chính",
-      "support": "15 Chi Nhánh Toàn Quốc"
+      "support": "15 Chi Nhánh Toàn Quốc",
+      "fsg_title": "FSG事業部",
+      "fsg_subtitle": "Chuyên gia chuyển đổi số",
+      "domains": {
+        "finance": "Tài chính",
+        "public": "Công khai",
+        "legacy": "Legacy",
+        "salesforce": "Salesforce"
+      }
     },
     "about": {
       "title": "Về Phòng Ban FSG",

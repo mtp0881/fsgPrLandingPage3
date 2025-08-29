@@ -34,7 +34,7 @@ const translations = {
     
     // About Section
     'about.title': 'FSG事業部について',
-    'about.subtitle': 'FPTソフトウェアジャパンのパブリックファイナンスサービス開発事業部として、金融・公共・レガシー・Salesforceの4つの専門分野で日本のデジタル変革をリードしています。',
+    'about.subtitle': 'FPTソフトウェアジャパンのファイナンスサービス開発事業部として、金融・公共・レガシー・Salesforceの4つの専門分野で日本のデジタル変革をリードしています。',
     'about.mission.title': 'ミッション',
     'about.mission.desc': '19年以上の経験と豊富な人材を活かし、銀行・保険・証券を中心とした金融業界のデジタル変革を支援します。',
     'about.vision.title': 'ビジョン',
@@ -48,12 +48,12 @@ const translations = {
     
     // Services Section
     'services.title': '私たちのサービス',
-    'services.subtitle': '金融、パブリック、レガシーモダナイゼーション、Salesforceの4つの主要領域で専門的なソリューションを提供',
+    'services.subtitle': '金融、公共、レガシーモダナイゼーション、Salesforceの4つの主要領域で専門的なソリューションを提供',
     'services.finance.title': '金融サービス',
     'services.finance.desc': '銀行・保険・証券業界向けの基幹システム開発からDX推進まで包括的なソリューションを提供。',
     'services.legacy.title': 'レガシーモダナイゼーション',
     'services.legacy.desc': '19年以上の経験と豊富な人材で、COBOLから最新技術まで幅広いマイグレーションサービスを提供。',
-    'services.public.title': 'パブリックサービス',
+    'services.public.title': '公共サービス',
     'services.public.desc': '官公庁・自治体・教育機関向けに社会インフラと福祉発展のための安定したソリューションを提供。',
     'services.salesforce.title': 'Salesforceソリューション',
     'services.salesforce.desc': '200名以上のエンジニア・コンサルタントによるSales Cloud、Service Cloud等の包括的なSalesforceソリューション。',

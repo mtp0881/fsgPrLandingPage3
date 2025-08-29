@@ -68,6 +68,26 @@ html {
   }
 }
 
+/* Fade in and out animation for save message */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+}
+
 .slide-up {
   animation: slideUp 0.6s ease-out;
 }

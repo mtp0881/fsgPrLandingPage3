@@ -2,22 +2,70 @@
 
 import WorldMap from './WorldMap';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useContent } from '../hooks/useContent';
 
 export default function GlobalNetwork() {
   const { language } = useLanguage();
+  const { content, loading, error } = useContent();
+
+  if (loading) {
+    return (
+      <section id="global-network" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const globalNetworkContent = content?.global_network || {
+    title: language === 'vn' ? 'Mạng Lưới Toàn Cầu' : 'グローバルネットワーク',
+    subtitle: language === 'vn' 
+      ? 'FPT Software có mặt tại 30 quốc gia với 86 văn phòng trên toàn cầu, mang đến dịch vụ chất lượng cao cho khách hàng quốc tế'
+      : 'FPTソフトウェアは世界30カ国・地域に86のオフィスを展開し、グローバルなお客様に高品質なサービスを提供しています',
+    stats: {
+      japan_offices: '23',
+      countries: '30',
+      total_offices: '86'
+    },
+    capabilities: {
+      ai_researchers: '20K+',
+      finance_engineers: '500+',
+      salesforce_experts: '200+',
+      dev_centers: '18+',
+      ai_partners: '5+'
+    },
+    features: {
+      quy_nhon_ai: {
+        title: language === 'vn' ? 'Trung tâm AI Quy Nhơn' : 'クイニョンAIセンター',
+        description: language === 'vn' ? '94,000m² với 20,000 nhà nghiên cứu AI' : '94,000㎡敷地・20,000人AI研究者'
+      },
+      ai_partnerships: {
+        title: language === 'vn' ? 'Đối tác AI hàng đầu' : 'AIパートナーシップ',
+        description: language === 'vn' ? 'NVIDIA, Mila, Landing AI, IBM, Meta' : 'NVIDIA・Mila・Landing AI・IBM・Meta'
+      },
+      global_deployment: {
+        title: language === 'vn' ? 'Triển khai toàn cầu' : 'グローバル展開',
+        description: language === 'vn' ? '30 quốc gia với 86 văn phòng và trung tâm' : '30カ国・地域86オフィス・センター'
+      },
+      quality_standards: {
+        title: language === 'vn' ? 'Chất lượng quốc tế' : '国際品質基準',
+        description: language === 'vn' ? 'ISO/IEC 27001, CMMI Level 5, SOC2' : 'ISO/IEC 27001・CMMI Level 5・SOC2'
+      }
+    }
+  };
 
   return (
     <section id="global-network" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {language === 'vn' ? 'Mạng Lưới Toàn Cầu' : 'グローバルネットワーク'}
+            {globalNetworkContent.title}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {language === 'vn' 
-              ? 'FPT Software có mặt tại 30 quốc gia với 86 văn phòng trên toàn cầu, mang đến dịch vụ chất lượng cao cho khách hàng quốc tế'
-              : 'FPTソフトウェアは世界30カ国・地域に86のオフィスを展開し、グローバルなお客様に高品質なサービスを提供しています'
-            }
+            {globalNetworkContent.subtitle}
           </p>
         </div>
 
@@ -32,7 +80,7 @@ export default function GlobalNetwork() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                   <div>
-                    <div className="text-2xl font-bold text-blue-600">23</div>
+                    <div className="text-2xl font-bold text-blue-600">{globalNetworkContent.stats?.japan_offices || '23'}</div>
                     <div className="text-sm text-gray-600">
                       {language === 'vn' ? 'Văn phòng Nhật Bản' : '日本国内拠点'}
                     </div>
@@ -46,7 +94,7 @@ export default function GlobalNetwork() {
 
                 <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
                   <div>
-                    <div className="text-2xl font-bold text-red-600">30</div>
+                    <div className="text-2xl font-bold text-red-600">{globalNetworkContent.stats?.countries || '30'}</div>
                     <div className="text-sm text-gray-600">
                       {language === 'vn' ? 'Quốc gia/Vùng lãnh thổ' : '国・地域'}
                     </div>
@@ -60,7 +108,7 @@ export default function GlobalNetwork() {
 
                 <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                   <div>
-                    <div className="text-2xl font-bold text-green-600">86</div>
+                    <div className="text-2xl font-bold text-green-600">{globalNetworkContent.stats?.total_offices || '86'}</div>
                     <div className="text-sm text-gray-600">
                       {language === 'vn' ? 'Tổng số văn phòng' : '総オフィス数'}
                     </div>
@@ -82,33 +130,33 @@ export default function GlobalNetwork() {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">
-                    {language === 'vn' ? 'Nhà nghiên cứu AI' : 'AI研究者'}
+                    {globalNetworkContent.capabilities?.ai_researchers?.label || (language === 'vn' ? 'Nhà nghiên cứu AI' : 'AI研究者')}
                   </span>
-                  <span className="font-semibold text-blue-600">20K+</span>
+                  <span className="font-semibold text-blue-600">{globalNetworkContent.capabilities?.ai_researchers?.value || '20K+'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">
-                    {language === 'vn' ? 'Kỹ sư tài chính' : '金融エンジニア'}
+                    {globalNetworkContent.capabilities?.finance_engineers?.label || (language === 'vn' ? 'Kỹ sư tài chính' : '金融エンジニア')}
                   </span>
-                  <span className="font-semibold text-green-600">500+</span>
+                  <span className="font-semibold text-green-600">{globalNetworkContent.capabilities?.finance_engineers?.value || '500+'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">
-                    {language === 'vn' ? 'Chuyên gia Salesforce' : 'Salesforce専門家'}
+                    {globalNetworkContent.capabilities?.salesforce_experts?.label || (language === 'vn' ? 'Chuyên gia Salesforce' : 'Salesforce専門家')}
                   </span>
-                  <span className="font-semibold text-purple-600">200+</span>
+                  <span className="font-semibold text-purple-600">{globalNetworkContent.capabilities?.salesforce_experts?.value || '200+'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">
-                    {language === 'vn' ? 'Trung tâm phát triển' : '開発センター'}
+                    {globalNetworkContent.capabilities?.dev_centers?.label || (language === 'vn' ? 'Trung tâm phát triển' : '開発センター')}
                   </span>
-                  <span className="font-semibold text-red-600">18+</span>
+                  <span className="font-semibold text-red-600">{globalNetworkContent.capabilities?.dev_centers?.value || '18+'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">
-                    {language === 'vn' ? 'Đối tác AI quốc tế' : 'AIパートナー'}
+                    {globalNetworkContent.capabilities?.ai_partners?.label || (language === 'vn' ? 'Đối tác AI quốc tế' : 'AIパートナー')}
                   </span>
-                  <span className="font-semibold text-indigo-600">5+</span>
+                  <span className="font-semibold text-indigo-600">{globalNetworkContent.capabilities?.ai_partners?.value || '5+'}</span>
                 </div>
               </div>
             </div>
@@ -129,13 +177,10 @@ export default function GlobalNetwork() {
               </svg>
             </div>
             <h4 className="font-semibold text-gray-900 mb-2">
-              {language === 'vn' ? 'Trung tâm AI Quy Nhơn' : 'クイニョンAIセンター'}
+              {globalNetworkContent.features?.quy_nhon_ai?.title || (language === 'vn' ? 'Trung tâm AI Quy Nhơn' : 'クイニョンAIセンター')}
             </h4>
             <p className="text-sm text-gray-600">
-              {language === 'vn' 
-                ? '94,000m² với 20,000 nhà nghiên cứu AI'
-                : '94,000㎡敷地・20,000人AI研究者'
-              }
+              {globalNetworkContent.features?.quy_nhon_ai?.description || (language === 'vn' ? '94,000m² với 20,000 nhà nghiên cứu AI' : '94,000㎡敷地・20,000人AI研究者')}
             </p>
           </div>
 
@@ -146,13 +191,10 @@ export default function GlobalNetwork() {
               </svg>
             </div>
             <h4 className="font-semibold text-gray-900 mb-2">
-              {language === 'vn' ? 'Đối tác AI hàng đầu' : 'AIパートナーシップ'}
+              {globalNetworkContent.features?.ai_partnerships?.title || (language === 'vn' ? 'Đối tác AI hàng đầu' : 'AIパートナーシップ')}
             </h4>
             <p className="text-sm text-gray-600">
-              {language === 'vn' 
-                ? 'NVIDIA, Mila, Landing AI, IBM, Meta'
-                : 'NVIDIA・Mila・Landing AI・IBM・Meta'
-              }
+              {globalNetworkContent.features?.ai_partnerships?.description || (language === 'vn' ? 'NVIDIA, Mila, Landing AI, IBM, Meta' : 'NVIDIA・Mila・Landing AI・IBM・Meta')}
             </p>
           </div>
 
@@ -163,13 +205,10 @@ export default function GlobalNetwork() {
               </svg>
             </div>
             <h4 className="font-semibold text-gray-900 mb-2">
-              {language === 'vn' ? 'Triển khai toàn cầu' : 'グローバル展開'}
+              {globalNetworkContent.features?.global_deployment?.title || (language === 'vn' ? 'Triển khai toàn cầu' : 'グローバル展開')}
             </h4>
             <p className="text-sm text-gray-600">
-              {language === 'vn' 
-                ? '30 quốc gia với 86 văn phòng và trung tâm'
-                : '30カ国・地域86オフィス・センター'
-              }
+              {globalNetworkContent.features?.global_deployment?.description || (language === 'vn' ? '30 quốc gia với 86 văn phòng và trung tâm' : '30カ国・地域86オフィス・センター')}
             </p>
           </div>
 
@@ -180,13 +219,10 @@ export default function GlobalNetwork() {
               </svg>
             </div>
             <h4 className="font-semibold text-gray-900 mb-2">
-              {language === 'vn' ? 'Chất lượng quốc tế' : '国際品質基準'}
+              {globalNetworkContent.features?.quality_standards?.title || (language === 'vn' ? 'Chất lượng quốc tế' : '国際品質基準')}
             </h4>
             <p className="text-sm text-gray-600">
-              {language === 'vn' 
-                ? 'ISO/IEC 27001, CMMI Level 5, SOC2'
-                : 'ISO/IEC 27001・CMMI Level 5・SOC2'
-              }
+              {globalNetworkContent.features?.quality_standards?.description || (language === 'vn' ? 'ISO/IEC 27001, CMMI Level 5, SOC2' : 'ISO/IEC 27001・CMMI Level 5・SOC2')}
             </p>
           </div>
         </div>
