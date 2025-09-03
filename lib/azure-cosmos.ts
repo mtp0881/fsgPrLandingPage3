@@ -20,6 +20,8 @@ function initializeCosmosClient() {
 
 export async function getContent(): Promise<{ jp: any; vn: any }> {
   try {
+    const { container } = initializeCosmosClient();
+    
     // Get JP content
     let jpContent = {};
     try {
@@ -58,6 +60,7 @@ export async function getContent(): Promise<{ jp: any; vn: any }> {
 
 export async function saveContent(data: { jp: any; vn: any }): Promise<{ success: boolean; error?: string }> {
   try {
+    const { container } = initializeCosmosClient();
     const timestamp = new Date().toISOString();
 
     // Save JP content
