@@ -1,0 +1,18 @@
+# Azure Configuration Template
+# Copy these values from the Azure setup script output
+
+# Azure Storage for images (replace Cloudinary)
+AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=fsgstorage2025;AccountKey=YOUR_STORAGE_KEY;EndpointSuffix=core.windows.net
+
+# Azure Cosmos DB for content storage (replace file-based storage)
+AZURE_COSMOS_ENDPOINT=https://fsg-content-db.documents.azure.com:443/
+AZURE_COSMOS_KEY=YOUR_COSMOS_KEY
+
+# Optional: Keep Cloudinary as fallback (can be removed after migration)
+# CLOUDINARY_CLOUD_NAME=your_cloud_name
+# CLOUDINARY_API_KEY=your_api_key  
+# CLOUDINARY_API_SECRET=your_api_secret
+
+# Admin Panel
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=your_secure_password

@@ -1,0 +1,11 @@
+# Azure Storage Configuration
+AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=fsgstorage2025;AccountKey=YOUR_STORAGE_KEY;EndpointSuffix=core.windows.net"
+AZURE_STORAGE_CONTAINER_NAME="images"
+
+# Azure Cosmos DB Configuration  
+AZURE_COSMOS_CONNECTION_STRING="AccountEndpoint=https://fsg-content-db.documents.azure.com:443/;AccountKey=YOUR_COSMOS_KEY;"
+AZURE_COSMOS_DATABASE_NAME="content-db"
+AZURE_COSMOS_CONTAINER_NAME="content"
+
+# Environment
+NODE_ENV="production"
