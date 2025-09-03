@@ -1,12 +1,22 @@
 import { CosmosClient } from '@azure/cosmos';
 
-const client = new CosmosClient({
-  endpoint: process.env.AZURE_COSMOS_ENDPOINT!,
-  key: process.env.AZURE_COSMOS_KEY!
-});
+let client: CosmosClient | null = null;
+let database: any = null;
+let container: any = null;
 
-const database = client.database('ContentDB');
-const container = database.container('content');
+function initializeCosmosClient() {
+  if (!client) {
+    const connectionString = process.env.AZURE_COSMOS_CONNECTION_STRING;
+    if (!connectionString) {
+      throw new Error('AZURE_COSMOS_CONNECTION_STRING environment variable is not set');
+    }
+    
+    client = new CosmosClient(connectionString);
+    database = client.database(process.env.AZURE_COSMOS_DATABASE_NAME || 'content-db');
+    container = database.container(process.env.AZURE_COSMOS_CONTAINER_NAME || 'content');
+  }
+  return { client, database, container };
+}
 
 export async function getContent(): Promise<{ jp: any; vn: any }> {
   try {
